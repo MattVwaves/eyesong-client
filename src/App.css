@@ -295,7 +295,7 @@ h2 {
 }
 
 #score {
-  position: absolute;
   width: fit-content;
-  right: 0;
+  margin: auto;
+  text-align: center;
 }

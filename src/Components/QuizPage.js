@@ -1,13 +1,18 @@
+import { useState } from 'react';
+
 import Hearts from './Hearts';
 import Eye from './Eye';
 import QuizForm from './QuizForm';
 
 export default function QuizPage() {
+  const [score, setScore] = useState(0);
+  const [hearts, setHearts] = useState(3);
+
   return (
     <>
       <div className="main-container">
         <div className="title-container-l">
-          <Hearts />
+          <Hearts hearts={hearts} />
           <h1>EYE POP</h1>
         </div>
 
@@ -26,11 +31,13 @@ export default function QuizPage() {
       </div>
 
       <div className="form-container">
-        <QuizForm />
+        <QuizForm
+          score={score}
+          setScore={setScore}
+          hearts={hearts}
+          setHearts={setHearts}
+        />
       </div>
-      <h2 id="score">
-        SCORE: <span id="points">0</span>
-      </h2>
     </>
   );
 }
