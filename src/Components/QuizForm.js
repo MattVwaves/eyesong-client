@@ -11,35 +11,37 @@ export default function QuizForm({
   setRoundDisplay,
 }) {
   const [songTitle, setSongTitle] = useState('hey joe');
-  const [artistName, setArtistName] = useState('The Doors');
-  const [songTitleInput, setSongTitleInput] = useState('');
-  const [artistInput, setArtistInput] = useState('');
+  const [artistName, setArtistName] = useState('the doors');
+  const [guessItemInput, setGuessItemInput] = useState('');
+  const [guessItem, setGuessItem] = useState('song');
 
   const handleChange = (e) => {
-    if (e.target.id === 'song') {
-      const songInput = e.target.value;
-      setSongTitleInput(songInput);
-    }
-    if (e.target.id === 'artist') {
-      const artistInput = e.target.value;
-      setArtistInput(artistInput);
-    }
+    const guessItemInput = e.target.value;
+    setGuessItemInput(guessItemInput);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (songTitleInput.toLowerCase() === songTitle) {
-      setScore(40);
+    if (guessItemInput.toLowerCase() === songTitle) {
+      if (roundDisplay === 1) setScore(score + 40);
+      if (roundDisplay === 2) setScore(score + 20);
+      if (roundDisplay === 3) setScore(score + 10);
       setSongTitle('');
-      setSongTitleInput('');
-      // setCorrectAnswer(true);
+      setGuessItemInput('');
+      setGuessItem('artist');
       return;
     }
-    setSongTitleInput('');
+    if (guessItemInput.toLowerCase() === artistName) {
+      setScore(score + 15);
+      setArtistName('');
+      setGuessItemInput('');
+      return;
+    }
     if (hearts > 1) {
       setHearts(hearts - 1);
       return;
     }
+    setGuessItemInput('');
     setHearts(3);
     setRound(round + 1);
     setRoundDisplay(roundDisplay + 1);
@@ -49,7 +51,7 @@ export default function QuizForm({
     <>
       <form className="quiz-sheet" onSubmit={handleSubmit}>
         <div className="labels">
-          <h2>song</h2>
+          <h2>{guessItem}</h2>
         </div>
         <div className="inputs">
           <input
@@ -60,7 +62,7 @@ export default function QuizForm({
             onInput={(F) => F.target.setCustomValidity('')}
             type="text"
             id="song"
-            value={songTitleInput}
+            value={guessItemInput}
             placeholder="...."
             onChange={handleChange}
           ></input>

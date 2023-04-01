@@ -8,7 +8,7 @@
 .App {
   background-color: rgb(228, 126, 228);
   height: 95vh;
-  width: 95vw;
+  width: 97.7vw;
   border: 10px solid black;
   margin: 10px;
 }
@@ -126,6 +126,9 @@ h1:hover {
   height: 40%;
   width: 90%;
   background-color: aqua;
+}
+
+#circle-2[animation='1'] {
   animation-name: circle;
   animation-duration: 4s;
   animation-direction: alternate;
@@ -136,6 +139,9 @@ h1:hover {
   height: 80%;
   width: 80%;
   background-color: aquamarine;
+}
+
+#circle-3[animation='1'] {
   animation-name: circle;
   animation-duration: 2s;
   animation-direction: alternate;
@@ -146,6 +152,9 @@ h1:hover {
   height: 70%;
   width: 70%;
   background-color: purple;
+}
+
+#circle-4[animation='1'] {
   animation-name: circle;
   animation-duration: 2s;
   animation-direction: alternate;
@@ -156,6 +165,9 @@ h1:hover {
   height: 60%;
   width: 60%;
   background-color: aquamarine;
+}
+
+#circle-5[animation='1'] {
   animation-name: circlefive;
   animation-duration: 2s;
   animation-direction: alternate;
@@ -188,7 +200,7 @@ h1:hover {
   background-color: aqua;
 }
 
-/* @keyframes circle {
+@keyframes circle {
   from {
     background-color: aqua;
     filter: opacity(100%);
@@ -210,7 +222,7 @@ h1:hover {
     background-color: purple;
     filter: opacity(20%);
   }
-} */
+}
 
 /* quizsheet */
 
@@ -224,6 +236,7 @@ h1:hover {
   width: 75px;
   height: 75px;
   border: 5px solid black;
+  border-style: none solid solid solid;
   margin: auto;
 }
 

@@ -21,15 +21,18 @@ export default function QuizPage() {
   const [round, setRound] = useState(0);
   const [roundDisplay, setRoundDisplay] = useState(1);
   const [playVideo, setPlayVideo] = useState(undefined);
+  const [animation, setAnimation] = useState(0);
 
   const handleReady = (e) => {
     const playVideo = e.target;
+    setPlayVideo(playVideo.clearVideo());
     setPlayVideo(playVideo);
   };
 
   const handlePlay = () => {
-    playVideo.playVideo();
+    playVideo.seekTo(0);
     if (round === 0) {
+      playVideo.playVideo();
       const pauseVideo = () => {
         playVideo.pauseVideo();
       };
@@ -37,10 +40,16 @@ export default function QuizPage() {
       setRound(round + 1);
     }
     if (round === 2) {
+      playVideo.playVideo();
       const pauseVideo = () => {
         playVideo.pauseVideo();
       };
       setTimeout(pauseVideo, 20000);
+      setRound(round + 1);
+    }
+    if (round === 4) {
+      playVideo.playVideo();
+      setAnimation(1);
       setRound(round + 1);
     }
   };
@@ -50,7 +59,7 @@ export default function QuizPage() {
       <div className="main-container">
         <div className="title-container-l">
           <Hearts hearts={hearts} />
-          <h1>EYE POP</h1>
+          <h1>EYESONG</h1>
         </div>
 
         <div className="circle-container">
@@ -60,7 +69,7 @@ export default function QuizPage() {
             // onPlay={(e) => setPlayVideo(e)}
             onReady={handleReady}
           />
-          <Eye />
+          <Eye animation={animation} setAnimation={setAnimation} />
         </div>
         <div id="container-r">
           <h2 id="points-available">
