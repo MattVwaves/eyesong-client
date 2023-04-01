@@ -1,38 +1,301 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  background-color: antiquewhite;
+}
+
 .App {
+  background-color: rgb(228, 126, 228);
+  height: 95vh;
+  width: 95vw;
+  border: 10px solid black;
+  margin: 10px;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 500px 1fr;
+}
+
+h1 {
+  font-size: 100px;
+  top: 50%;
+  margin-top: 100px;
+  background-color: aquamarine;
+  border: 5px solid black;
+  width: fit-content;
+  position: fixed;
+  left: 0;
+  padding: 10px 10px 10px 10px;
+}
+
+#test-image {
+  display: block;
+  position: absolute;
+  margin: auto;
+  width: 500px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circle-container {
+  position: relative;
+  height: 500px;
+  width: 500px;
+  margin: auto;
+  background-color: transparent !important;
+}
+
+.title-container-l {
+  position: relative;
+  height: 500px;
+  text-align: right;
+}
+
+h1:hover {
+  animation-name: title;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: 2;
+}
+
+@keyframes title {
+  from {
+    padding: 10px;
+    filter: hue-rotate(0deg);
+  }
+  to {
+    padding: 20px;
+    filter: hue-rotate(90deg);
+  }
+}
+
+.title-container-r {
+  height: 500px;
+  text-align: left;
+}
+
+.circle-inner {
+  margin-right: 5px;
+}
+
+.circle {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border: 5px solid black;
+  border-radius: 50%;
+  position: absolute;
+}
+
+#circle-1 {
+  border: none;
+}
+
+#circle-2,
+#circle-3,
+#circle-4,
+#circle-5,
+#circle-6,
+#circle-7,
+#circle-8,
+#circle-9,
+#circle-10 {
+  /* width: 90%; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#circle-2 {
+  height: 40%;
+  width: 90%;
+  background-color: aqua;
+  animation-name: circle;
+  animation-duration: 4s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+#circle-3 {
+  height: 80%;
+  width: 80%;
+  background-color: aquamarine;
+  animation-name: circle;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+#circle-4 {
+  height: 70%;
+  width: 70%;
+  background-color: purple;
+  animation-name: circle;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+#circle-5 {
+  height: 60%;
+  width: 60%;
+  background-color: aquamarine;
+  animation-name: circlefive;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+#circle-6 {
+  height: 50%;
+  width: 20%;
+  background-color: aqua;
+}
+#circle-7 {
+  height: 40%;
+  width: 14%;
+  background-color: aquamarine;
+}
+#circle-8 {
+  height: 30%;
+  width: 30%;
+  background-color: aqua;
+}
+#circle-9 {
+  height: 20%;
+  width: 20%;
+  background-color: aquamarine;
+}
+#circle-10 {
+  height: 10%;
+  width: 10%;
+  background-color: aqua;
+}
+
+/* @keyframes circle {
+  from {
+    background-color: aqua;
+    filter: opacity(100%);
+    height: 40%;
+  }
+  to {
+    background-color: purple;
+    filter: opacity(25%);
+    height: 90%;
+  }
+} */
+
+/* @keyframes circlefive {
+  from {
+    background-color: transparent !important;
+    filter: opacity(100%);
+  }
+  to {
+    background-color: purple;
+    filter: opacity(20%);
+  }
+} */
+
+/* quizsheet */
+
+#play {
+  width: 75px;
+  margin: auto;
+  display: block;
+}
+
+.play-container {
+  width: 75px;
+  height: 75px;
+  border: 5px solid black;
+  margin: auto;
+}
+
+.form-container {
+  width: fit-content;
+  margin: auto;
+}
+
+label {
+  font-size: 20px;
+}
+
+form {
+  margin-top: 10px;
+  display: block;
+}
+
+input {
+  height: 50px;
+  width: 400px;
+  font-size: 30px;
+  border: 5px solid black;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.labels,
+.inputs,
+.submit-buttons,
+form,
+.form-container {
+  background-color: transparent !important;
+}
+
+.quiz-sheet {
+  display: grid;
+  grid-template-columns: 1fr 410px 1fr;
+}
+
+h2 {
+  height: fit-content;
+  margin: 10px;
+  border: 5px solid black;
+  padding: 5px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hearts {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(228, 126, 228);
+  border: 5px black;
+  border-style: solid solid none solid;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#heart {
+  filter: hue-rotate(-0.1turn);
+  background-color: transparent !important;
+  height: 30px;
+  padding: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#container-r {
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+#points-available {
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(228, 126, 228);
+  padding: 10px;
+  margin: 0px;
+  border-style: solid solid none solid;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#points {
+  background-color: gray;
+  color: aqua;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+#score {
+  position: absolute;
+  width: fit-content;
+  right: 0;
 }
