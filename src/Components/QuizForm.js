@@ -1,6 +1,15 @@
 import { useState } from 'react';
 
-export default function QuizForm({ score, setScore, hearts, setHearts }) {
+export default function QuizForm({
+  score,
+  setScore,
+  hearts,
+  setHearts,
+  round,
+  setRound,
+  roundDisplay,
+  setRoundDisplay,
+}) {
   const [songTitle, setSongTitle] = useState('hey joe');
   const [artistName, setArtistName] = useState('The Doors');
   const [songTitleInput, setSongTitleInput] = useState('');
@@ -20,14 +29,20 @@ export default function QuizForm({ score, setScore, hearts, setHearts }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (songTitleInput.toLowerCase() === songTitle) {
-      setScore(20);
+      setScore(40);
       setSongTitle('');
       setSongTitleInput('');
       // setCorrectAnswer(true);
       return;
     }
     setSongTitleInput('');
-    setHearts(hearts - 1);
+    if (hearts > 1) {
+      setHearts(hearts - 1);
+      return;
+    }
+    setHearts(3);
+    setRound(round + 1);
+    setRoundDisplay(roundDisplay + 1);
   };
 
   return (

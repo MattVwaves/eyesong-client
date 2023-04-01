@@ -1,12 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import YouTube from 'react-youtube';
 
 import Hearts from './Hearts';
 import Eye from './Eye';
 import QuizForm from './QuizForm';
 
+const opts = {
+  height: '177',
+  width: '175',
+  playerVars: {
+    autoplay: 0,
+    modestbranding: 1,
+  },
+};
+
 export default function QuizPage() {
   const [score, setScore] = useState(0);
   const [hearts, setHearts] = useState(3);
+  const [playbackTimer, setPlaybackTimer] = useState(5000);
+  const [round, setRound] = useState(0);
+  const [roundDisplay, setRoundDisplay] = useState(1);
+  const [playVideo, setPlayVideo] = useState(undefined);
+
+  const handleReady = (e) => {
+    const playVideo = e.target;
+    setPlayVideo(playVideo);
+  };
+
+  const handlePlay = () => {
+    playVideo.playVideo();
+    if (round === 0) {
+      const pauseVideo = () => {
+        playVideo.pauseVideo();
+      };
+      setTimeout(pauseVideo, 5000);
+      setRound(round + 1);
+    }
+    if (round === 2) {
+      const pauseVideo = () => {
+        playVideo.pauseVideo();
+      };
+      setTimeout(pauseVideo, 20000);
+      setRound(round + 1);
+    }
+  };
 
   return (
     <>
@@ -17,17 +54,29 @@ export default function QuizPage() {
         </div>
 
         <div className="circle-container">
-          {/* <img src={require('../dino-horiz.jpg')} id="test-image" /> */}
+          <YouTube
+            videoId={'AmOgpoCKYoM'}
+            opts={opts}
+            // onPlay={(e) => setPlayVideo(e)}
+            onReady={handleReady}
+          />
           <Eye />
         </div>
         <div id="container-r">
           <h2 id="points-available">
-            Points Available: <span id="points">40</span>
+            Round: <span id="points">{roundDisplay}</span>
           </h2>
         </div>
       </div>
       <div className="play-container">
-        <img src={require('../play01.png')} id="play" />
+        {round % 2 === 0 && (
+          <img
+            src={require('../play01.png')}
+            id="play"
+            onClick={handlePlay}
+            alt="play"
+          />
+        )}
       </div>
 
       <div className="form-container">
@@ -36,6 +85,10 @@ export default function QuizPage() {
           setScore={setScore}
           hearts={hearts}
           setHearts={setHearts}
+          round={round}
+          setRound={setRound}
+          roundDisplay={roundDisplay}
+          setRoundDisplay={setRoundDisplay}
         />
       </div>
     </>
