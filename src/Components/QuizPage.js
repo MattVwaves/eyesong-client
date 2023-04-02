@@ -56,49 +56,51 @@ export default function QuizPage() {
 
   return (
     <>
-      <div className="main-container">
-        <div className="title-container-l">
-          <Hearts hearts={hearts} />
-          <h1>EYESONG</h1>
+      <div className="App">
+        <div className="main-container">
+          <div className="title-container-l">
+            <Hearts hearts={hearts} />
+            <h1>EYESONG</h1>
+          </div>
+
+          <div className="circle-container">
+            <YouTube
+              videoId={'AmOgpoCKYoM'}
+              opts={opts}
+              // onPlay={(e) => setPlayVideo(e)}
+              onReady={handleReady}
+            />
+            <Eye animation={animation} setAnimation={setAnimation} />
+          </div>
+          <div id="container-r">
+            <h2 id="points-available">
+              Round: <span id="points">{roundDisplay}</span>
+            </h2>
+          </div>
+        </div>
+        <div className="play-container">
+          {round % 2 === 0 && (
+            <img
+              src={require('../play01.png')}
+              id="play"
+              onClick={handlePlay}
+              alt="play"
+            />
+          )}
         </div>
 
-        <div className="circle-container">
-          <YouTube
-            videoId={'AmOgpoCKYoM'}
-            opts={opts}
-            // onPlay={(e) => setPlayVideo(e)}
-            onReady={handleReady}
+        <div className="form-container">
+          <QuizForm
+            score={score}
+            setScore={setScore}
+            hearts={hearts}
+            setHearts={setHearts}
+            round={round}
+            setRound={setRound}
+            roundDisplay={roundDisplay}
+            setRoundDisplay={setRoundDisplay}
           />
-          <Eye animation={animation} setAnimation={setAnimation} />
         </div>
-        <div id="container-r">
-          <h2 id="points-available">
-            Round: <span id="points">{roundDisplay}</span>
-          </h2>
-        </div>
-      </div>
-      <div className="play-container">
-        {round % 2 === 0 && (
-          <img
-            src={require('../play01.png')}
-            id="play"
-            onClick={handlePlay}
-            alt="play"
-          />
-        )}
-      </div>
-
-      <div className="form-container">
-        <QuizForm
-          score={score}
-          setScore={setScore}
-          hearts={hearts}
-          setHearts={setHearts}
-          round={round}
-          setRound={setRound}
-          roundDisplay={roundDisplay}
-          setRoundDisplay={setRoundDisplay}
-        />
       </div>
     </>
   );

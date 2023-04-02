@@ -370,7 +370,8 @@ h2 {
 }
 
 #login-submit,
-#login-register {
+#login-register,
+#decades-title {
   width: fit-content;
   margin: auto;
   margin-top: 10px;
@@ -410,4 +411,101 @@ button,
 #error {
   position: absolute;
   background-color: white;
+}
+
+/* Decades */
+
+#decades.login-container {
+  height: 75vh;
+  width: 50vw;
+}
+
+#decades.login-container-text {
+  height: 75vh;
+  width: 50vw;
+  filter: opacity(100%);
+}
+
+#decades-title {
+  margin-top: 20px;
+}
+
+.decades-container {
+  position: fixed;
+  display: grid;
+  grid-template-columns: repeat(3, 15vw);
+  grid-template-rows: repeat(3, 18vh);
+  /* background-color: transparent !important; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 10px;
+}
+
+.decade {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.decade-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  mix-blend-mode: hard-light;
+  animation-name: decade;
+  animation-duration: 3s;
+  animation-direction: normal;
+  animation-iteration-count: infinite;
+}
+
+#billie {
+  animation-duration: 2.75s;
+}
+
+#elvis {
+  animation-duration: 2.5s;
+}
+
+#jimi {
+  animation-duration: 2.25s;
+}
+
+#pink {
+  animation-duration: 2s;
+}
+
+#prince {
+  animation-duration: 1.75s;
+}
+
+#kurt {
+  animation-duration: 1.5s;
+}
+
+#amy {
+  animation-duration: 1.25s;
+}
+
+#lana {
+  animation-duration: 1s;
+}
+
+#abel {
+  animation-duration: 0.75s;
+}
+
+@keyframes decade {
+  from {
+    mix-blend-mode: hard-light;
+  }
+  to {
+    mix-blend-mode: multiply;
+  }
+}
+
+img:hover {
+  cursor: pointer;
+  animation-name: none;
+  mix-blend-mode: darken;
+  margin: 5px;
 }
