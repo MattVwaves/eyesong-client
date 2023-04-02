@@ -41,7 +41,7 @@ export default function Login({
         password: password,
       }),
     };
-    await fetch(`${apiUrl}/user/login`, opts)
+    await fetch(`https://eyesong-server.onrender.com/user/login`, opts)
       .then((res) => {
         if (res.ok !== true) {
           throw Error('username or password incorrect. Remember thyself.');
@@ -66,9 +66,7 @@ export default function Login({
       <div className="login-container"></div>
       <div className="login-container-text">
         {loginError && (
-          <p id="error">
-            You are not who you think you are. Work out your creds baby.
-          </p>
+          <p id="error">username or password incorrect. Remember thyself.</p>
         )}
         {regSuccess && (
           <p id="error">Registration successful! Please login...</p>
