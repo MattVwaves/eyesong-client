@@ -29,7 +29,7 @@ export default function Register({
       setUser({ ...user, favouriteAnimal: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user);
     const opts = {
@@ -43,7 +43,7 @@ export default function Register({
       }),
     };
 
-    fetch('http://localhost:4000/user/register', opts)
+    await fetch('http://localhost:4000/user/register', opts)
       .then((res) => {
         if (res.ok !== true) {
           throw Error(`The username ${user.username} is already taken!`);

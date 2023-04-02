@@ -332,7 +332,7 @@ h2 {
 .login-container,
 .login-container-text {
   position: absolute;
-  height: 30vh;
+  height: 31vh;
   width: 30vw;
   top: 50%;
   left: 50%;
@@ -353,7 +353,7 @@ h2 {
 
 #register-container.login-container,
 #register-container.login-container-text {
-  height: 49.5vh;
+  height: 44.2vh;
 }
 
 #login {
@@ -385,6 +385,10 @@ h2 {
 #login-register:hover {
   cursor: pointer;
   color: rgb(228, 126, 228);
+}
+
+label {
+  position: absolute;
 }
 
 .required:after {
