@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+const apiUrl = 'https://eyesong-server.onrender.com/';
+
 export default function Register({
   setDisplayLogin,
   setDisplayRegister,
@@ -43,7 +45,7 @@ export default function Register({
       }),
     };
 
-    await fetch('http://localhost:4000/user/register', opts)
+    await fetch(`${apiUrl}/user/register`, opts)
       .then((res) => {
         if (res.ok !== true) {
           throw Error(`The username ${user.username} is already taken!`);

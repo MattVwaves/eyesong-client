@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const apiUrl = 'https://eyesong-server.onrender.com/';
+
 export default function Login({
   setDisplayLogin,
   setDisplayRegister,
@@ -39,7 +41,7 @@ export default function Login({
         password: password,
       }),
     };
-    await fetch('http://localhost:4000/user/login', opts)
+    await fetch(`${apiUrl}/user/login`, opts)
       .then((res) => {
         if (res.ok !== true) {
           throw Error('username or password incorrect. Remember thyself.');
