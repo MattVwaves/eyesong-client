@@ -402,3 +402,8 @@ button,
   border: none;
   background-color: transparent !important;
 }
+
+#error {
+  position: absolute;
+  background-color: white;
+}

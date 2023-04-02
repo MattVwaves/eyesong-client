@@ -1,4 +1,8 @@
-export default function Login({ setDisplayLogin, setDisplayRegister }) {
+export default function Login({
+  setDisplayLogin,
+  setDisplayRegister,
+  regSuccess,
+}) {
   const handleDisplayRegister = () => {
     setDisplayLogin(false);
     setDisplayRegister(true);
@@ -7,6 +11,9 @@ export default function Login({ setDisplayLogin, setDisplayRegister }) {
     <>
       <div className="login-container"></div>
       <div className="login-container-text">
+        {regSuccess && (
+          <p id="error">Registration successful! Please login...</p>
+        )}
         <h2 id="login">LOGIN</h2>
         <form>
           <input id="login-input" placeholder="username"></input>

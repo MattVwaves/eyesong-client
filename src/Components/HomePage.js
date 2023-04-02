@@ -6,6 +6,7 @@ import Register from './Register';
 export default function HomePage() {
   const [displayLogin, setDisplayLogin] = useState(true);
   const [displayRegister, setDisplayRegister] = useState(false);
+  const [regSuccess, setRegSuccess] = useState(false);
   return (
     <>
       <div className="circle-container">
@@ -15,12 +16,14 @@ export default function HomePage() {
         <Login
           setDisplayLogin={setDisplayLogin}
           setDisplayRegister={setDisplayRegister}
+          regSuccess={regSuccess}
         />
       )}
       {displayRegister && (
         <Register
           setDisplayLogin={setDisplayLogin}
           setDisplayRegister={setDisplayRegister}
+          setRegSuccess={setRegSuccess}
         />
       )}
 

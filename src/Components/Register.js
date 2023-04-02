@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-export default function Register({ setDisplayLogin, setDisplayRegister }) {
+export default function Register({
+  setDisplayLogin,
+  setDisplayRegister,
+  setRegSuccess,
+}) {
+  const [regError, setRegError] = useState(null);
   const [user, setUser] = useState({
     username: '',
     password: '',
@@ -14,6 +19,7 @@ export default function Register({ setDisplayLogin, setDisplayRegister }) {
   };
 
   const handleChange = (e) => {
+    setRegError(null);
     const input = e.target.placeholder;
     const value = e.target.value;
     if (input === 'username') setUser({ ...user, username: value });
@@ -26,12 +32,40 @@ export default function Register({ setDisplayLogin, setDisplayRegister }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(user);
+    const opts = {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({
+        username: user.username,
+        password: user.password,
+        starSign: user.starSign,
+        favouriteAnimal: user.favouriteAnimal,
+      }),
+    };
+
+    fetch('http://localhost:4000/user/register', opts)
+      .then((res) => {
+        if (res.ok !== true) {
+          throw Error(`The username ${user.username} is already taken!`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setDisplayRegister(false);
+        setDisplayLogin(true);
+        setRegSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        return setRegError(err.message);
+      });
   };
 
   return (
     <>
       <div className="login-container" id="register-container"></div>
       <div className="login-container-text" id="register-container">
+        {regError && <p id="error">{regError}</p>}
         <h2 id="login">REGISTER</h2>
         <form onSubmit={handleSubmit}>
           <label className="required">username</label>
