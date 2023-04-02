@@ -1,10 +1,12 @@
 import './App.css';
 import QuizPage from './Components/QuizPage';
+import HomePage from './Components/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <QuizPage />
+      {/* <QuizPage /> */}
+      <HomePage />
     </div>
   );
 }

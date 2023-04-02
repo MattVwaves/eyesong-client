@@ -11,6 +11,7 @@
   width: 97.7vw;
   border: 10px solid black;
   margin: 10px;
+  /* position: relative; */
 }
 
 .main-container {
@@ -324,4 +325,80 @@ h2 {
   width: fit-content;
   margin: auto;
   text-align: center;
+}
+
+/* login */
+
+.login-container,
+.login-container-text {
+  position: absolute;
+  height: 30vh;
+  width: 30vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* border-radius: 50%; */
+}
+
+.login-container {
+  filter: opacity(75%);
+}
+
+.login-container-text {
+  background-color: transparent !important;
+  border: 5px solid black;
+  border-style: none solid solid solid;
+  /* border-radius: 50%; */
+}
+
+#register-container.login-container,
+#register-container.login-container-text {
+  height: 49.5vh;
+}
+
+#login {
+  width: fit-content;
+  margin: auto;
+  margin-top: 20px;
+}
+
+#login-input {
+  margin: auto;
+  margin-bottom: 5px;
+  height: 40px;
+  width: 300px;
+}
+
+#login-submit,
+#login-register {
+  width: fit-content;
+  margin: auto;
+  margin-top: 10px;
+}
+
+#login-register {
+  padding: 10px;
+  background-color: rgb(154, 241, 212);
+  border-color: rgb(154, 241, 212) black black black;
+}
+
+#login-register:hover {
+  cursor: pointer;
+  color: rgb(228, 126, 228);
+}
+
+.required:after {
+  content: ' *';
+  color: red;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+button,
+.button-container {
+  border: none;
+  background-color: transparent !important;
 }
