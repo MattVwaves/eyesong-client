@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const apiUrl = process.env.SERVER_URL;
-
 export default function Login({
   setDisplayLogin,
   setDisplayRegister,
@@ -11,6 +9,8 @@ export default function Login({
   setToken,
   setLoggedInUser,
 }) {
+  const apiUrl = process.env.SERVER_URL;
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(null);

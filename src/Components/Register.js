@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-const apiUrl = process.env.SERVER_URL;
-
 export default function Register({
   setDisplayLogin,
   setDisplayRegister,
   setRegSuccess,
 }) {
+  const apiUrl = process.env.SERVER_URL;
+
   const [regError, setRegError] = useState(null);
   const [user, setUser] = useState({
     username: '',
