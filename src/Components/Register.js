@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const apiUrl = 'https://eyesong-server.onrender.com/';
+const apiUrl = process.env.SERVER_URL;
 
 export default function Register({
   setDisplayLogin,

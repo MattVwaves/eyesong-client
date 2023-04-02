@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const apiUrl = 'https://eyesong-server.onrender.com/';
+const apiUrl = process.env.SERVER_URL;
 
 export default function Login({
   setDisplayLogin,
