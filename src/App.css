@@ -338,6 +338,7 @@ h2 {
   background-color: rgb(228, 126, 228);
   border: 5px black;
   border-style: solid solid none solid;
+  padding: 5px;
 }
 
 #heart {
@@ -358,6 +359,7 @@ h2 {
   padding: 10px;
   margin: 0px;
   border-style: solid solid none solid;
+  margin-left: 10px;
 }
 
 #points {
