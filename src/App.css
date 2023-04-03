@@ -259,7 +259,6 @@ h1:hover {
 #play {
   width: 75px;
   margin: auto;
-  margin-top: 15px;
   display: block;
   border-radius: 50%;
 }
@@ -267,8 +266,9 @@ h1:hover {
 .play-container {
   width: 75px;
   height: 75px;
-  /* border: 5px solid white;
-  border-style: none solid solid solid; */
+
+  border: 5px solid white;
+  border-style: none solid solid solid;
   margin: auto;
   border-radius: 50%;
 }
@@ -290,6 +290,7 @@ form {
   margin-top: 20px;
   display: block;
   padding: 20px;
+  background-color: transparent !important;
 }
 
 input {
@@ -321,6 +322,7 @@ form,
   display: grid;
   grid-template-columns: 1fr 410px 1fr;
   background-color: black;
+  filter: opacity(75%);
 }
 
 h2 {
@@ -381,7 +383,7 @@ h2 {
 .login-container,
 .login-container-text {
   position: absolute;
-  height: 31vh;
+  height: 37vh;
   width: 30vw;
   top: 50%;
   left: 50%;
@@ -402,7 +404,7 @@ h2 {
 
 #register-container.login-container,
 #register-container.login-container-text {
-  height: 44.2vh;
+  height: 50vh;
 }
 
 #login {
