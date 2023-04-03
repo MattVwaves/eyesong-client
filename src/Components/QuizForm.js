@@ -16,6 +16,7 @@ export default function QuizForm({
   const [guessItem, setGuessItem] = useState('song');
 
   const handleChange = (e) => {
+    setGuessItemInput('');
     const guessItemInput = e.target.value;
     setGuessItemInput(guessItemInput);
   };

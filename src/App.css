@@ -2,7 +2,23 @@
   margin: 0px;
   padding: 0px;
   list-style: none;
-  background-color: antiquewhite;
+  background-color: black;
+}
+
+body,
+button,
+input {
+  font-family: 'Barlow Condensed', sans-serif;
+  /* color: violet */
+}
+
+img {
+  background-color: aquamarine;
+}
+
+input,
+h2 {
+  background-color: aquamarine;
 }
 
 .App {
@@ -99,9 +115,22 @@ h1:hover {
   height: 100%;
   width: 100%;
   background-color: transparent;
-  border: 5px solid black;
+  border: 5px solid white;
   border-radius: 50%;
   position: absolute;
+  animation-name: outer-circle;
+  animation-duration: 4s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes outer-circle {
+  from {
+    border-color: white;
+  }
+  to {
+    border-color: black;
+  }
 }
 
 #circle-1 {
@@ -230,20 +259,27 @@ h1:hover {
 #play {
   width: 75px;
   margin: auto;
+  margin-top: 15px;
   display: block;
+  border-radius: 50%;
 }
 
 .play-container {
   width: 75px;
   height: 75px;
-  border: 5px solid black;
-  border-style: none solid solid solid;
+  /* border: 5px solid white;
+  border-style: none solid solid solid; */
   margin: auto;
+  border-radius: 50%;
 }
 
 .form-container {
   width: fit-content;
   margin: auto;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  /* background-color: gray; */
+  border: 5px solid gray;
 }
 
 label {
@@ -251,30 +287,40 @@ label {
 }
 
 form {
-  margin-top: 10px;
+  margin-top: 20px;
   display: block;
+  padding: 20px;
 }
 
 input {
   height: 50px;
   width: 400px;
   font-size: 30px;
-  border: 5px solid black;
+  border: 5px solid white;
   display: block;
   margin-bottom: 10px;
 }
 
-.labels,
+.form-container,
+input {
+  animation-name: outer-circle;
+  animation-duration: 4s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+/* .labels,
 .inputs,
 .submit-buttons,
 form,
 .form-container {
   background-color: transparent !important;
-}
+} */
 
 .quiz-sheet {
   display: grid;
   grid-template-columns: 1fr 410px 1fr;
+  background-color: black;
 }
 
 h2 {
@@ -325,6 +371,7 @@ h2 {
   width: fit-content;
   margin: auto;
   text-align: center;
+  border: none;
 }
 
 /* login */
@@ -499,7 +546,7 @@ button,
     mix-blend-mode: hard-light;
   }
   to {
-    mix-blend-mode: multiply;
+    mix-blend-mode: difference;
   }
 }
 
