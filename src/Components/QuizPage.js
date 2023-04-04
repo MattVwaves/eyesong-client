@@ -24,30 +24,42 @@ export default function QuizPage() {
 
   const decadeTag = localStorage.getItem('decade');
   const lastFmApiKey = process.env.REACT_APP_LAST_FM_API_KEY;
-  const baseUrl =
+  const lastFmBaseUrl =
     'http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=';
+  const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
+  const youtubeBaseUrl = 'https://youtube.googleapis.com/youtube/v3/search?q=';
 
-  const createRandomTrack = () => {
+  const createRandomSong = () => {
     return Math.floor(Math.random() * 100);
   };
 
   useEffect(() => {
+    // youtube GET
     fetch(
-      `${baseUrl}${decadeTag}&limit=200&api_key=${lastFmApiKey}&format=json`
+      `${lastFmBaseUrl}${decadeTag}&limit=200&api_key=${lastFmApiKey}&format=json`
     )
       .then((res) => res.json())
       .then((data) => {
-        const tracks = data.tracks.track;
-        const randomTrack = tracks[createRandomTrack()];
-        const artistName = randomTrack.artist.name;
-        const trackName = randomTrack.name;
+        const songs = data.tracks.track;
+        const randomSong = songs[createRandomSong()];
+        const artistName = randomSong.artist.name;
+        const songName = randomSong.name;
+        localStorage.setItem('artist-name', artistName);
+        localStorage.setItem('song-name', songName);
         const artistArr = artistName.split(' ');
-        const trackArr = trackName.split(' ');
+        const songArr = songName.split(' ');
         let artistQuery = '';
-        let trackQuery = '';
+        let songQuery = '';
         artistArr.forEach((word) => (artistQuery += `${word}%20`));
-        trackArr.forEach((word) => (trackQuery += `${word}%20`));
-        const youtubeQuery = artistQuery + trackQuery;
+        songArr.forEach((word) => (songQuery += `${word}%20`));
+        const youtubeQuery = artistQuery + songQuery;
+        // lastfm GET
+        fetch(`${youtubeBaseUrl}${youtubeQuery})single&key=${youtubeApiKey}`)
+          .then((res) => res.json())
+          .then((data) => {
+            const videoId = data.items[0].id.videoId;
+            localStorage.setItem('video-id', videoId);
+          });
       });
   }, []);
 
@@ -93,7 +105,7 @@ export default function QuizPage() {
 
           <div className="circle-container">
             <YouTube
-              videoId={'AmOgpoCKYoM'}
+              videoId={localStorage.getItem('video-id')}
               opts={opts}
               // onPlay={(e) => setPlayVideo(e)}
               onReady={handleReady}
