@@ -461,7 +461,22 @@ button,
 
 #error {
   position: absolute;
-  background-color: white;
+  background-color: rgb(228, 126, 228);
+  font-size: 20px;
+  padding: 5px;
+  animation-name: error;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes error {
+  from {
+    color: black;
+  }
+  to {
+    color: red;
+  }
 }
 
 /* Decades */
