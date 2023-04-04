@@ -17,11 +17,39 @@ const opts = {
 export default function QuizPage() {
   const [score, setScore] = useState(0);
   const [hearts, setHearts] = useState(3);
-  const [playbackTimer, setPlaybackTimer] = useState(5000);
   const [round, setRound] = useState(0);
   const [roundDisplay, setRoundDisplay] = useState(1);
   const [playVideo, setPlayVideo] = useState(undefined);
   const [animation, setAnimation] = useState(0);
+
+  const decadeTag = localStorage.getItem('decade');
+  const lastFmApiKey = process.env.REACT_APP_LAST_FM_API_KEY;
+  const baseUrl =
+    'http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=';
+
+  const createRandomTrack = () => {
+    return Math.floor(Math.random() * 100);
+  };
+
+  useEffect(() => {
+    fetch(
+      `${baseUrl}${decadeTag}&limit=200&api_key=${lastFmApiKey}&format=json`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const tracks = data.tracks.track;
+        const randomTrack = tracks[createRandomTrack()];
+        const artistName = randomTrack.artist.name;
+        const trackName = randomTrack.name;
+        const artistArr = artistName.split(' ');
+        const trackArr = trackName.split(' ');
+        let artistQuery = '';
+        let trackQuery = '';
+        artistArr.forEach((word) => (artistQuery += `${word}%20`));
+        trackArr.forEach((word) => (trackQuery += `${word}%20`));
+        const youtubeQuery = artistQuery + trackQuery;
+      });
+  }, []);
 
   const handleReady = (e) => {
     const playVideo = e.target;

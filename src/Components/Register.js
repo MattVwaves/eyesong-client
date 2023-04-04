@@ -5,7 +5,7 @@ export default function Register({
   setDisplayRegister,
   setRegSuccess,
 }) {
-  const apiUrl = process.env.SERVER_URL;
+  const apiUrl = process.env.REACT_APP_SERVER_URL;
 
   const [regError, setRegError] = useState(null);
   const [user, setUser] = useState({
@@ -45,7 +45,7 @@ export default function Register({
       }),
     };
 
-    await fetch(`https://eyesong-server.onrender.com/user/register`, opts)
+    await fetch(`${apiUrl}/user/register`, opts)
       .then((res) => {
         if (res.ok !== true) {
           throw Error(`The username ${user.username} is already taken!`);

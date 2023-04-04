@@ -9,7 +9,7 @@ export default function Login({
   setToken,
   setLoggedInUser,
 }) {
-  const apiUrl = process.env.SERVER_URL;
+  const apiUrl = process.env.REACT_APP_SERVER_URL;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -41,7 +41,7 @@ export default function Login({
         password: password,
       }),
     };
-    await fetch(`https://eyesong-server.onrender.com/user/login`, opts)
+    await fetch(`${apiUrl}/user/login`, opts)
       .then((res) => {
         if (res.ok !== true) {
           throw Error('username or password incorrect. Remember thyself.');

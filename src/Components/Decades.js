@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 export default function Decades() {
   const Navi = useNavigate();
   const handleDecadeSelection = (e) => {
+    const decade = e.target.name;
+    localStorage.setItem('decade', decade);
     Navi('/quiz');
   };
   return (
@@ -17,6 +19,7 @@ export default function Decades() {
             <img
               className="decade-image"
               onClick={handleDecadeSelection}
+              name="1940s"
               id="billie"
               src={require('../Assets/billie-h.webp')}
               alt="billie "
