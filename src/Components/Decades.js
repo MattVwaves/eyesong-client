@@ -11,8 +11,17 @@ export default function Decades() {
   return (
     <>
       <div className="App">
+        <div className="vinyl-container">
+          <h3>Songs remaining</h3>
+          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
+          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
+          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
+          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
+          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
+        </div>
         <div className="circle-container">{/* <Eye /> */}</div>
         <div className="login-container" id="decades"></div>
+
         <div className="login-container-text" id="decades">
           <h2 id="decades-title">choose decade</h2>
           <div className="decades-container">
@@ -82,7 +91,6 @@ export default function Decades() {
             />
           </div>
         </div>
-
         <div className="title-container">
           <h1>EYESONG</h1>
         </div>
