@@ -5,7 +5,7 @@ import YourScores from './YourScores';
 export default function Dashboard() {
   const [displayScores, setDisplayScores] = useState(false);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     if (e.target.innerHTML === 'YOUR SCORES') setDisplayScores(true);
     if (e.target.innerHTML === 'X') setDisplayScores(false);
   };
