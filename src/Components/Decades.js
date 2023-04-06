@@ -1,24 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Vinyl from './Vinyl';
+
 export default function Decades() {
+  const [songNumber, setSongNumber] = useState(1);
+
   const Navi = useNavigate();
   const handleDecadeSelection = (e) => {
     const decade = e.target.name;
     localStorage.setItem('decade', decade);
     Navi('/quiz');
   };
+
+  useEffect(() => {
+    const storedSongNumber = Number(localStorage.getItem('song-number'));
+    if (storedSongNumber) setSongNumber(storedSongNumber);
+  });
+
   return (
     <>
       <div className="App">
-        <div className="vinyl-container">
-          <h3>Songs remaining</h3>
-          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
-          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
-          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
-          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
-          <img id="vinyl" src={require('../Assets/vinyl2.png')}></img>
-        </div>
+        <Vinyl songNumber={songNumber} />
         <div className="circle-container">{/* <Eye /> */}</div>
         <div className="login-container" id="decades"></div>
 

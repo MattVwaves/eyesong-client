@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const apiUrl = process.env.REACT_APP_SERVER_URL;
 
@@ -38,7 +39,13 @@ export default function QuizForm({
     score: score,
   });
 
-  useEffect(() => {});
+  const Navi = useNavigate();
+
+  useEffect(() => {
+    const storedSongNumber = Number(localStorage.getItem('song-number'));
+    if (storedSongNumber) setSongNumber(storedSongNumber);
+    console.log(songNumber);
+  });
 
   const handleChange = (e) => {
     setGuessItemInput('');
@@ -89,7 +96,11 @@ export default function QuizForm({
             }
             return res.json();
           })
-          .then((data) => console.log(data))
+          .then((data) => {
+            localStorage.setItem('scoresheet-id', data.scoreSheet.id);
+            localStorage.setItem('song-number', songNumber + 1);
+            Navi('/decades');
+          })
           .catch((err) => {
             console.log(err.message);
           });
