@@ -55,7 +55,7 @@ export default function Login({
         setToken(localStorage.token);
         setLoggedInUser(data.user);
         localStorage.setItem('user-id', data.user.id);
-        Navi('/decades');
+        Navi('/dashboard');
       })
       .catch((err) => {
         setLoginError(err.message);

@@ -577,3 +577,57 @@ img:hover {
   mix-blend-mode: darken;
   margin: 5px;
 }
+
+/* Dashboard */
+
+#login.dash-play {
+  /* border-radius: 50%; */
+  font-size: 40px;
+  padding: 10px;
+  /* width: fit-content; */
+}
+
+.your-scores {
+  /* background-color: white; */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  margin: auto;
+  width: 100%;
+  height: fit-content;
+}
+
+.scores-container {
+  position: relative;
+  /* left: 50%; */
+  display: grid;
+  grid-template-columns: 20% 40% 40%;
+  margin: 20px;
+}
+
+#your-score {
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  /* font-size: 20px; */
+}
+
+#close-window {
+  position: absolute;
+  background-color: yellow;
+  margin: 10px;
+  padding: 10px;
+  top: 0;
+  right: 0;
+}
+
+#close-window:hover {
+  cursor: pointer;
+  background-color: white;
+}
+
+#login:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
