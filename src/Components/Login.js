@@ -43,6 +43,7 @@ export default function Login({
     };
     await fetch(`${apiUrl}/user/login`, opts)
       .then((res) => {
+        console.log(res);
         if (res.ok !== true) {
           throw Error('username or password incorrect. Remember thyself.');
         }
@@ -53,6 +54,7 @@ export default function Login({
         localStorage.setItem('loggedInUser', data.user);
         setToken(localStorage.token);
         setLoggedInUser(data.user);
+        localStorage.setItem('user-id', data.user.id);
         Navi('/decades');
       })
       .catch((err) => {

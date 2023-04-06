@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const apiUrl = process.env.REACT_APP_SERVER_URL;
+
 export default function QuizForm({
   score,
   setScore,
@@ -21,6 +23,22 @@ export default function QuizForm({
   const [guessItemInput, setGuessItemInput] = useState('');
   const [guessItem, setGuessItem] = useState('song');
   const [songOrArtist, setSongOrArtist] = useState('song');
+  const [songNumber, setSongNumber] = useState(1);
+  const [userId, setUserId] = useState(Number(localStorage.getItem('user-id')));
+  const [videoId, setVideoId] = useState(localStorage.getItem('video-id'));
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+  const [scoredSong, setScoredSong] = useState({
+    id: userId,
+    videoId: videoId,
+    songNumber: songNumber,
+    artistName: artistName,
+    songTitle: songTitle,
+    decade: localStorage.getItem('decade'),
+    score: score,
+  });
+
+  useEffect(() => {});
 
   const handleChange = (e) => {
     setGuessItemInput('');
@@ -28,31 +46,53 @@ export default function QuizForm({
     setGuessItemInput(guessItemInput);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (songPlaying === false) {
       setPlaySongFirst(true);
       return;
     }
     e.preventDefault();
-    if (guessItemInput.toLowerCase() === songTitle.toLowerCase()) {
-      if (roundDisplay === 1) setScore(score + 40);
-      if (roundDisplay === 2) setScore(score + 20);
-      if (roundDisplay === 3) setScore(score + 10);
-      setSongTitle('');
-      setGuessItemInput('');
-      setGuessItem('artist');
-      setRound(round + 1);
-      setRoundDisplay(roundDisplay + 1);
-      setSongOrArtist('artist');
-      return;
+    if (songOrArtist === 'song') {
+      if (guessItemInput.toLowerCase() === songTitle.toLowerCase()) {
+        if (roundDisplay === 1) setScore(score + 40);
+        if (roundDisplay === 2) setScore(score + 20);
+        if (roundDisplay === 3) setScore(score + 10);
+        setGuessItemInput('');
+        setGuessItem('artist');
+        setRound(round + 1);
+        setRoundDisplay(roundDisplay + 1);
+        setSongOrArtist('artist');
+        return;
+      }
     }
+
     if (songOrArtist === 'artist') {
       if (guessItemInput.toLowerCase() === artistName.toLowerCase()) {
         setScore(score + 15);
-        setArtistName('');
+        const finalScore = score + 15;
         setGuessItemInput('');
-        return;
+        // setScoredSong({ ...scoredSong, score: finalScore });
+        const opts = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ ...scoredSong, score: finalScore }),
+        };
+
+        await fetch(`${apiUrl}/scoresheet`, opts)
+          .then((res) => {
+            if (res.ok !== true) {
+              throw Error('Unauthorized action');
+            }
+            return res.json();
+          })
+          .then((data) => console.log(data))
+          .catch((err) => {
+            console.log(err.message);
+          });
       }
     }
     if (hearts > 1) {

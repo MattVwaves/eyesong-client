@@ -21,8 +21,10 @@ export default function QuizPage() {
   const [roundDisplay, setRoundDisplay] = useState(1);
   const [playVideo, setPlayVideo] = useState(undefined);
   const [animation, setAnimation] = useState(0);
-  const [songTitle, setSongTitle] = useState('');
-  const [artistName, setArtistName] = useState('');
+  const [songTitle, setSongTitle] = useState(localStorage.getItem('song-name'));
+  const [artistName, setArtistName] = useState(
+    localStorage.getItem('artist-name')
+  );
   const [songPlaying, setSongPlaying] = useState(false);
   const [playSongFirst, setPlaySongFirst] = useState(false);
 
@@ -38,8 +40,8 @@ export default function QuizPage() {
   };
 
   useEffect(() => {
-    setArtistName(localStorage.getItem('artist-name'));
-    setSongTitle(localStorage.getItem('song-name'));
+    // setArtistName(localStorage.getItem('artist-name'));
+    // setSongTitle(localStorage.getItem('song-name'));
     console.log(artistName);
     console.log(songTitle);
     // fetch(
