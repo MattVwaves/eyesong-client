@@ -631,3 +631,32 @@ img:hover {
   cursor: pointer;
   background-color: yellow;
 }
+
+#your-score.view-scoresheet:hover {
+  background-color: rgb(228, 126, 228);
+  cursor: pointer;
+}
+
+#scoresheet-container {
+  width: 50vw;
+  grid-template-columns: 10% 30% 15% 15% 15% 15%;
+  margin: 0;
+  /* grid-template-rows: repeat(5, 10vh); */
+}
+
+#scoresheet-container p {
+  background-color: yellow;
+}
+
+#your-score {
+  position: relative;
+}
+
+#your-score iframe {
+  height: 25vh;
+  width: 100%;
+  border-radius: 0%;
+  position: inherit;
+  transform: translate(0%, 0%);
+  margin: 0;
+}
