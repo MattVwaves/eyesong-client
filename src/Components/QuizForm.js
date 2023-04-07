@@ -28,6 +28,9 @@ export default function QuizForm({
   const [userId, setUserId] = useState(Number(localStorage.getItem('user-id')));
   const [videoId, setVideoId] = useState(localStorage.getItem('video-id'));
   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [scoresheetId, setScoresheetId] = useState(
+    Number(localStorage.getItem('scoresheet-id'))
+  );
 
   const [scoredSong, setScoredSong] = useState({
     id: userId,
@@ -67,8 +70,8 @@ export default function QuizForm({
         if (roundDisplay === 3) setScore(score + 10);
         setGuessItemInput('');
         setGuessItem('artist');
-        setRound(round + 1);
-        setRoundDisplay(roundDisplay + 1);
+        // setRound(round + 1);
+        // setRoundDisplay(roundDisplay + 1);
         setSongOrArtist('artist');
         return;
       }
@@ -88,33 +91,102 @@ export default function QuizForm({
           },
           body: JSON.stringify({ ...scoredSong, score: finalScore }),
         };
-
-        await fetch(`${apiUrl}/scoresheet`, opts)
-          .then((res) => {
-            if (res.ok !== true) {
-              throw Error('Unauthorized action');
-            }
-            return res.json();
-          })
-          .then((data) => {
-            localStorage.setItem('scoresheet-id', data.scoreSheet.id);
-            localStorage.setItem('song-number', songNumber + 1);
-            Navi('/decades');
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
+        if (!scoresheetId) {
+          await fetch(`${apiUrl}/scoresheet`, opts)
+            .then((res) => {
+              if (res.ok !== true) {
+                throw Error('Unauthorized action');
+              }
+              return res.json();
+            })
+            .then((data) => {
+              localStorage.setItem('scoresheet-id', data.scoreSheet.id);
+              localStorage.setItem('song-number', songNumber + 1);
+              if (songNumber < 5) Navi('/decades');
+              if (songNumber === 5) Navi('/dashboard');
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
+          return;
+        }
+        if (scoresheetId) {
+          await fetch(`${apiUrl}/scoresheet/${scoresheetId}`, opts)
+            .then((res) => {
+              if (res.ok !== true) {
+                throw Error('Unauthorized action');
+              }
+              return res.json();
+            })
+            .then((data) => {
+              localStorage.setItem('song-number', songNumber + 1);
+              if (songNumber < 5) Navi('/decades');
+              if (songNumber === 5) Navi('/dashboard');
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
+          return;
+        }
       }
     }
     if (hearts > 1) {
       setHearts(hearts - 1);
       return;
     }
-    setGuessItemInput('');
-    setHearts(3);
-    setRound(round + 1);
-    setRoundDisplay(roundDisplay + 1);
-    setSongPlaying(false);
+    if (roundDisplay < 3) {
+      setGuessItemInput('');
+      setHearts(3);
+      setRound(round + 1);
+      setRoundDisplay(roundDisplay + 1);
+      setSongPlaying(false);
+      return;
+    }
+
+    const opts = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ scoredSong }),
+    };
+    if (!scoresheetId) {
+      await fetch(`${apiUrl}/scoresheet`, opts)
+        .then((res) => {
+          if (res.ok !== true) {
+            throw Error('Unauthorized action');
+          }
+          return res.json();
+        })
+        .then((data) => {
+          localStorage.setItem('song-number', songNumber + 1);
+          if (songNumber < 5) Navi('/decades');
+          Navi('/dashboard');
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+      return;
+    }
+    if (scoresheetId) {
+      await fetch(`${apiUrl}/scoresheet/${scoresheetId}`, opts)
+        .then((res) => {
+          if (res.ok !== true) {
+            throw Error('Unauthorized action');
+          }
+          return res.json();
+        })
+        .then((data) => {
+          localStorage.setItem('song-number', songNumber + 1);
+          if (songNumber < 5) Navi('/decades');
+          Navi('/dashboard');
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+      return;
+    }
   };
 
   return (
