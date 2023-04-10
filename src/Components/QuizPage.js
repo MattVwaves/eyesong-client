@@ -15,7 +15,6 @@ const opts = {
 };
 
 export default function QuizPage() {
-  const [score, setScore] = useState(0);
   const [hearts, setHearts] = useState(3);
   const [round, setRound] = useState(0);
   const [roundDisplay, setRoundDisplay] = useState(1);
@@ -33,6 +32,8 @@ export default function QuizPage() {
   const lastFmBaseUrl =
     'http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=';
   const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
+  const youtubeApiKey_2 = process.env.REACT_APP_YOUTUBE_API_KEY_2;
+
   const youtubeBaseUrl = 'https://youtube.googleapis.com/youtube/v3/search?q=';
 
   const createRandomSong = () => {
@@ -44,33 +45,33 @@ export default function QuizPage() {
     // setSongTitle(localStorage.getItem('song-name'));
     console.log(artistName);
     console.log(songTitle);
-    // fetch(
-    //   `${lastFmBaseUrl}${decadeTag}&limit=200&api_key=${lastFmApiKey}&format=json`
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     const songs = data.tracks.track;
-    //     const randomSong = songs[createRandomSong()];
-    //     const artistName = randomSong.artist.name;
-    //     const songTitle = randomSong.name;
-    //     setArtistName(artistName);
-    //     setSongTitle(songTitle);
-    //     localStorage.setItem('artist-name', artistName);
-    //     localStorage.setItem('song-name', songTitle);
-    //     const artistArr = artistName.split(' ');
-    //     const songArr = songTitle.split(' ');
-    //     let artistQuery = '';
-    //     let songQuery = '';
-    //     artistArr.forEach((word) => (artistQuery += `${word}%20`));
-    //     songArr.forEach((word) => (songQuery += `${word}%20`));
-    //     const youtubeQuery = artistQuery + songQuery;
-    //     fetch(`${youtubeBaseUrl}${youtubeQuery})single&key=${youtubeApiKey}`)
-    //       .then((res) => res.json())
-    //       .then((data) => {
-    //         const videoId = data.items[0].id.videoId;
-    //         localStorage.setItem('video-id', videoId);
-    //       });
-    //   });
+    fetch(
+      `${lastFmBaseUrl}${decadeTag}&limit=200&api_key=${lastFmApiKey}&format=json`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const songs = data.tracks.track;
+        const randomSong = songs[createRandomSong()];
+        const artistName = randomSong.artist.name;
+        const songTitle = randomSong.name;
+        setArtistName(artistName);
+        setSongTitle(songTitle);
+        localStorage.setItem('artist-name', artistName);
+        localStorage.setItem('song-name', songTitle);
+        const artistArr = artistName.split(' ');
+        const songArr = songTitle.split(' ');
+        let artistQuery = '';
+        let songQuery = '';
+        artistArr.forEach((word) => (artistQuery += `${word}%20`));
+        songArr.forEach((word) => (songQuery += `${word}%20`));
+        const youtubeQuery = artistQuery + songQuery;
+        fetch(`${youtubeBaseUrl}${youtubeQuery})single&key=${youtubeApiKey}`)
+          .then((res) => res.json())
+          .then((data) => {
+            const videoId = data.items[0].id.videoId;
+            localStorage.setItem('video-id', videoId);
+          });
+      });
   }, []);
 
   const handleReady = (e) => {
@@ -143,8 +144,6 @@ export default function QuizPage() {
 
         <div className="form-container">
           <QuizForm
-            score={score}
-            setScore={setScore}
             hearts={hearts}
             setHearts={setHearts}
             round={round}

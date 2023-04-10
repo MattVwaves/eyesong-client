@@ -11,7 +11,7 @@ export default function Dashboard() {
   const handleClick = async (e) => {
     if (e.target.innerHTML === 'YOUR SCORES') setDisplayScores(true);
     if (e.target.innerHTML === 'X') setDisplayScores(false);
-    if (e.target.innerHTML === 'PLAY') Navi('/quiz');
+    if (e.target.innerHTML === 'PLAY') Navi('/decades');
   };
 
   return (

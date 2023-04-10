@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const apiUrl = process.env.REACT_APP_SERVER_URL;
 
 export default function QuizForm({
-  score,
-  setScore,
   hearts,
   setHearts,
   round,
@@ -24,30 +22,36 @@ export default function QuizForm({
   const [guessItemInput, setGuessItemInput] = useState('');
   const [guessItem, setGuessItem] = useState('song');
   const [songOrArtist, setSongOrArtist] = useState('song');
-  const [songNumber, setSongNumber] = useState(1);
-  const [userId, setUserId] = useState(Number(localStorage.getItem('user-id')));
-  const [videoId, setVideoId] = useState(localStorage.getItem('video-id'));
-  const [token, setToken] = useState(localStorage.getItem('token'));
-  const [scoresheetId, setScoresheetId] = useState(
-    Number(localStorage.getItem('scoresheet-id'))
-  );
-
-  const [scoredSong, setScoredSong] = useState({
-    id: userId,
-    videoId: videoId,
-    songNumber: songNumber,
-    artistName: artistName,
-    songTitle: songTitle,
-    decade: localStorage.getItem('decade'),
-    score: score,
-  });
+  const [decade, setDecade] = useState(null);
+  const [songNumber, setSongNumber] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null);
+  const [score, setScore] = useState(0);
+  const [scoresheetId, setScoresheetId] = useState(null);
+  const [videoId, setVideoId] = useState(null);
 
   const Navi = useNavigate();
 
   useEffect(() => {
     const storedSongNumber = Number(localStorage.getItem('song-number'));
     if (storedSongNumber) setSongNumber(storedSongNumber);
-    console.log(songNumber);
+    if (!songNumber) setSongNumber(1);
+    const artistName = localStorage.getItem('artist-name');
+    setArtistName(artistName);
+    const songTitle = localStorage.getItem('song-name');
+    setSongTitle(songTitle);
+    const score = Number(localStorage.getItem('score'));
+    if (score) setScore(score);
+    const token = localStorage.getItem('token');
+    setToken(token);
+    const userId = Number(localStorage.getItem('user-id'));
+    setUserId(userId);
+    const scoresheetId = Number(localStorage.getItem('scoresheet-id'));
+    setScoresheetId(scoresheetId);
+    const decade = localStorage.getItem('decade');
+    setDecade(decade);
+    const videoId = localStorage.getItem('video-id');
+    setVideoId(videoId);
   });
 
   const handleChange = (e) => {
@@ -56,8 +60,9 @@ export default function QuizForm({
     setGuessItemInput(guessItemInput);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
     if (songPlaying === false) {
       setPlaySongFirst(true);
       return;
@@ -65,13 +70,23 @@ export default function QuizForm({
     e.preventDefault();
     if (songOrArtist === 'song') {
       if (guessItemInput.toLowerCase() === songTitle.toLowerCase()) {
-        if (roundDisplay === 1) setScore(score + 40);
-        if (roundDisplay === 2) setScore(score + 20);
-        if (roundDisplay === 3) setScore(score + 10);
+        if (roundDisplay === 1) {
+          const updatedScore = score + 40;
+          setScore(updatedScore);
+          localStorage.setItem('score', updatedScore);
+        }
+        if (roundDisplay === 2) {
+          const updatedScore = score + 20;
+          setScore(updatedScore);
+          localStorage.setItem('score', updatedScore);
+        }
+        if (roundDisplay === 3) {
+          const updatedScore = score + 10;
+          setScore(updatedScore);
+          localStorage.setItem('score', updatedScore);
+        }
         setGuessItemInput('');
         setGuessItem('artist');
-        // setRound(round + 1);
-        // setRoundDisplay(roundDisplay + 1);
         setSongOrArtist('artist');
         return;
       }
@@ -79,20 +94,30 @@ export default function QuizForm({
 
     if (songOrArtist === 'artist') {
       if (guessItemInput.toLowerCase() === artistName.toLowerCase()) {
-        setScore(score + 15);
-        const finalScore = score + 15;
+        const updatedScore = score + 15;
+        setScore(updatedScore);
+        localStorage.setItem('score', updatedScore);
         setGuessItemInput('');
-        // setScoredSong({ ...scoredSong, score: finalScore });
-        const opts = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ ...scoredSong, score: finalScore }),
-        };
+
         if (!scoresheetId) {
-          await fetch(`${apiUrl}/scoresheet`, opts)
+          const opts = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              id: userId,
+              videoId: videoId,
+              songNumber: songNumber,
+              artistName: artistName,
+              songTitle: songTitle,
+              decade: decade,
+              score: score,
+            }),
+          };
+
+          fetch(`${apiUrl}/scoresheet`, opts)
             .then((res) => {
               if (res.ok !== true) {
                 throw Error('Unauthorized action');
@@ -102,8 +127,16 @@ export default function QuizForm({
             .then((data) => {
               localStorage.setItem('scoresheet-id', data.scoreSheet.id);
               localStorage.setItem('song-number', songNumber + 1);
-              if (songNumber < 5) Navi('/decades');
-              if (songNumber === 5) Navi('/dashboard');
+              if (songNumber < 5) {
+                localStorage.setItem('score', null);
+                Navi('/decades');
+              }
+              if (songNumber === 5) {
+                localStorage.setItem('song-number', null);
+                localStorage.setItem('scoresheet-id', null);
+                localStorage.setItem('score', null);
+                Navi('/dashboard');
+              }
             })
             .catch((err) => {
               console.log(err.message);
@@ -111,7 +144,24 @@ export default function QuizForm({
           return;
         }
         if (scoresheetId) {
-          await fetch(`${apiUrl}/scoresheet/${scoresheetId}`, opts)
+          const opts = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              id: userId,
+              videoId: videoId,
+              songNumber: songNumber,
+              artistName: artistName,
+              songTitle: songTitle,
+              decade: decade,
+              score: score,
+            }),
+          };
+
+          fetch(`${apiUrl}/scoresheet/${scoresheetId}`, opts)
             .then((res) => {
               if (res.ok !== true) {
                 throw Error('Unauthorized action');
@@ -119,9 +169,18 @@ export default function QuizForm({
               return res.json();
             })
             .then((data) => {
+              console.log(data);
               localStorage.setItem('song-number', songNumber + 1);
-              if (songNumber < 5) Navi('/decades');
-              if (songNumber === 5) Navi('/dashboard');
+              if (songNumber < 5) {
+                localStorage.setItem('score', null);
+                Navi('/decades');
+              }
+              if (songNumber === 5) {
+                localStorage.setItem('song-number', null);
+                localStorage.setItem('scoresheet-id', null);
+                localStorage.setItem('score', null);
+                Navi('/dashboard');
+              }
             })
             .catch((err) => {
               console.log(err.message);
@@ -143,16 +202,24 @@ export default function QuizForm({
       return;
     }
 
-    const opts = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ scoredSong }),
-    };
     if (!scoresheetId) {
-      await fetch(`${apiUrl}/scoresheet`, opts)
+      const opts = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          id: userId,
+          videoId: videoId,
+          songNumber: songNumber,
+          artistName: artistName,
+          songTitle: songTitle,
+          decade: decade,
+          score: score,
+        }),
+      };
+      fetch(`${apiUrl}/scoresheet`, opts)
         .then((res) => {
           if (res.ok !== true) {
             throw Error('Unauthorized action');
@@ -161,8 +228,16 @@ export default function QuizForm({
         })
         .then((data) => {
           localStorage.setItem('song-number', songNumber + 1);
-          if (songNumber < 5) Navi('/decades');
-          Navi('/dashboard');
+          if (songNumber < 5) {
+            localStorage.setItem('score', null);
+            Navi('/decades');
+          }
+          if (songNumber === 5) {
+            localStorage.setItem('song-number', null);
+            localStorage.setItem('scoresheet-id', null);
+            localStorage.setItem('score', null);
+            Navi('/dashboard');
+          }
         })
         .catch((err) => {
           console.log(err.message);
@@ -170,7 +245,23 @@ export default function QuizForm({
       return;
     }
     if (scoresheetId) {
-      await fetch(`${apiUrl}/scoresheet/${scoresheetId}`, opts)
+      const opts = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          id: userId,
+          videoId: videoId,
+          songNumber: songNumber,
+          artistName: artistName,
+          songTitle: songTitle,
+          decade: decade,
+          score: score,
+        }),
+      };
+      fetch(`${apiUrl}/scoresheet/${scoresheetId}`, opts)
         .then((res) => {
           if (res.ok !== true) {
             throw Error('Unauthorized action');
@@ -179,8 +270,17 @@ export default function QuizForm({
         })
         .then((data) => {
           localStorage.setItem('song-number', songNumber + 1);
-          if (songNumber < 5) Navi('/decades');
-          Navi('/dashboard');
+          if (songNumber < 5) {
+            localStorage.setItem('score', null);
+            Navi('/decades');
+          }
+
+          if (songNumber === 5) {
+            localStorage.setItem('song-number', null);
+            localStorage.setItem('scoresheet-id', null);
+            localStorage.setItem('score', null);
+            Navi('/dashboard');
+          }
         })
         .catch((err) => {
           console.log(err.message);

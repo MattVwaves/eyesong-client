@@ -40,6 +40,7 @@ export default function Decades() {
               className="decade-image"
               onClick={handleDecadeSelection}
               id="elvis"
+              name="1950s"
               src={require('../Assets/elvis.jpeg')}
               alt="elvis presley"
             />
@@ -47,6 +48,7 @@ export default function Decades() {
               className="decade-image"
               onClick={handleDecadeSelection}
               id="jimi"
+              name="1960s"
               src={require('../Assets/hendrix.jpeg')}
               alt="jimi hendrix"
             />
@@ -54,6 +56,7 @@ export default function Decades() {
               className="decade-image"
               onClick={handleDecadeSelection}
               id="pink"
+              name="1970s"
               src={require('../Assets/thewall.jpeg')}
               alt="the wall"
             />
@@ -61,6 +64,7 @@ export default function Decades() {
               className="decade-image"
               onClick={handleDecadeSelection}
               id="prince"
+              name="1980s"
               src={require('../Assets/prince.webp')}
               alt="prince"
             />
@@ -68,6 +72,7 @@ export default function Decades() {
               className="decade-image"
               onClick={handleDecadeSelection}
               id="kurt"
+              name="1990s"
               src={require('../Assets/kurt2.webp')}
               alt="kurt"
             />
@@ -75,6 +80,7 @@ export default function Decades() {
               className="decade-image"
               onClick={handleDecadeSelection}
               id="amy"
+              name="2000s"
               src={require('../Assets/amy.jpeg')}
               alt="amy"
             />
@@ -82,6 +88,7 @@ export default function Decades() {
               className="decade-image"
               onClick={handleDecadeSelection}
               id="lana"
+              name="2010s"
               src={require('../Assets/lana.jpeg')}
               alt="lana"
             />
@@ -89,6 +96,7 @@ export default function Decades() {
               className="decade-image"
               onClick={handleDecadeSelection}
               id="abel"
+              name="2020s"
               src={require('../Assets/abel.jpeg')}
               alt="abel"
             />

@@ -50,7 +50,9 @@ export default function Login({
         return res.json();
       })
       .then((data) => {
-        localStorage.setItem('token', data.accessToken);
+        const token = data.accessToken;
+        console.log('token after login is:', token);
+        localStorage.setItem('token', token);
         localStorage.setItem('loggedInUser', data.user);
         setToken(localStorage.token);
         setLoggedInUser(data.user);
