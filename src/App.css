@@ -381,7 +381,8 @@ h2 {
 .login-container,
 .login-container-text {
   position: absolute;
-  height: 37vh;
+  height: 310px;
+  min-width: 300px;
   width: 30vw;
   top: 50%;
   left: 50%;
@@ -402,7 +403,7 @@ h2 {
 
 #register-container.login-container,
 #register-container.login-container-text {
-  height: 50vh;
+  height: 51vh;
 }
 
 #login {
@@ -415,7 +416,8 @@ h2 {
   margin: auto;
   margin-bottom: 5px;
   height: 40px;
-  width: 300px;
+  min-width: 200px;
+  width: 15vw;
 }
 
 #login-submit,
@@ -439,11 +441,16 @@ h2 {
 
 label {
   position: absolute;
+  background-color: transparent !important;
+  padding: 10px;
+  margin: auto;
+  color: yellow;
 }
 
 .required:after {
-  content: ' *';
+  content: '*';
   color: red;
+  text-align: right;
 }
 
 .button-container {
@@ -629,11 +636,11 @@ img:hover {
 
 #login:hover {
   cursor: pointer;
-  background-color: yellow;
+  background-color: rgb(238, 238, 81);
 }
 
 #your-score.view-scoresheet:hover {
-  background-color: rgb(228, 126, 228);
+  color: purple;
   cursor: pointer;
 }
 
@@ -641,13 +648,15 @@ img:hover {
   width: 50vw;
   grid-template-columns: 10% 30% 15% 15% 15% 15%;
   margin: 0;
-  /* position: absolute;
-  z-index: 1; */
+  position: absolute;
+  z-index: 1;
   /* grid-template-rows: repeat(5, 10vh); */
 }
 
 #scoresheet-container p {
-  background-color: yellow;
+  background-color: rgb(230, 158, 230);
+  color: white;
+  font-size: 30px;
 }
 
 #your-score {
@@ -661,4 +670,12 @@ img:hover {
   position: inherit;
   transform: translate(0%, 0%);
   margin: 0;
+}
+
+#leader-msg {
+  margin-bottom: 60px;
+  position: absolute;
+  border: none;
+  background-color: transparent !important;
+  color: yellow;
 }

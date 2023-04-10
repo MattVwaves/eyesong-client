@@ -17,6 +17,9 @@ export default function Scores() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [userId, setUserId] = useState(Number(localStorage.getItem('user-id')));
   const [scoresheetsDisplayed, setScoresheetsDisplayed] = useState([]);
+  const [viewScoreStyle, setViewScoreStyle] = useState({
+    backgroundColor: 'yellow',
+  });
 
   const handleScoreSheet = (score) => {
     if (!scoresheetsDisplayed.includes(score.id))
@@ -48,13 +51,15 @@ export default function Scores() {
       })
       .then((data) => {
         const scoreSheets = data.scoreSheets;
-        const updatedScoresheets = scoreSheets.map((sheet) => {
-          let totalScore = 0;
-          sheet.songs.forEach((song) => {
-            totalScore += song.score;
+        const updatedScoresheets = scoreSheets
+          .sort((a, b) => b.id - a.id)
+          .map((sheet) => {
+            let totalScore = 0;
+            sheet.songs.forEach((song) => {
+              totalScore += song.score;
+            });
+            return { ...sheet, totalScore: totalScore };
           });
-          return { ...sheet, totalScore: totalScore };
-        });
         setScoreSheets(updatedScoresheets);
       });
   });
@@ -72,8 +77,15 @@ export default function Scores() {
                   className="view-scoresheet"
                   name={score.id}
                   onClick={() => handleScoreSheet(score)}
+                  style={{
+                    backgroundColor: scoresheetsDisplayed.includes(score.id)
+                      ? 'rgb(238, 238, 81)'
+                      : 'white',
+                  }}
                 >
-                  view scoresheet
+                  {!scoresheetsDisplayed.includes(score.id) &&
+                    'view scoresheet'}
+                  {scoresheetsDisplayed.includes(score.id) && 'X'}
                 </p>
               </div>
               {scoresheetsDisplayed.includes(score.id) && (
