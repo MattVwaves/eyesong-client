@@ -32,7 +32,8 @@ export default function QuizPage() {
   const lastFmBaseUrl =
     'https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=';
   const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
-  const youtubeApiKey_2 = process.env.REACT_APP_YOUTUBE_API_KEY_2;
+  const youtubeApiKey2 = process.env.REACT_APP_YOUTUBE_API_KEY_2;
+  const youtubeApiKey3 = process.env.REACT_APP_YOUTUBE_API_KEY_3;
 
   const youtubeBaseUrl = 'https://youtube.googleapis.com/youtube/v3/search?q=';
 
@@ -65,7 +66,7 @@ export default function QuizPage() {
         artistArr.forEach((word) => (artistQuery += `${word}%20`));
         songArr.forEach((word) => (songQuery += `${word}%20`));
         const youtubeQuery = artistQuery + songQuery;
-        fetch(`${youtubeBaseUrl}${youtubeQuery})single&key=${youtubeApiKey}`)
+        fetch(`${youtubeBaseUrl}${youtubeQuery})single&key=${youtubeApiKey3}`)
           .then((res) => res.json())
           .then((data) => {
             const videoId = data.items[0].id.videoId;
