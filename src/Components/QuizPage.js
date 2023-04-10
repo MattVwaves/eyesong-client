@@ -30,7 +30,7 @@ export default function QuizPage() {
   const decadeTag = localStorage.getItem('decade');
   const lastFmApiKey = process.env.REACT_APP_LAST_FM_API_KEY;
   const lastFmBaseUrl =
-    'http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=';
+    'https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=';
   const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
   const youtubeApiKey_2 = process.env.REACT_APP_YOUTUBE_API_KEY_2;
 
