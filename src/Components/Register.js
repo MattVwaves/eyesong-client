@@ -4,10 +4,10 @@ export default function Register({
   setDisplayLogin,
   setDisplayRegister,
   setRegSuccess,
+  setAnimation,
 }) {
   const apiUrl = process.env.REACT_APP_SERVER_URL;
 
-  const [animation, setAnimation] = useState(0);
   const [regError, setRegError] = useState(null);
   const [user, setUser] = useState({
     username: '',
@@ -45,13 +45,12 @@ export default function Register({
         favouriteAnimal: user.favouriteAnimal,
       }),
     };
-
+    setAnimation(1);
     await fetch(`${apiUrl}/user/register`, opts)
       .then((res) => {
         if (res.ok !== true) {
           throw Error(`The username ${user.username} is already taken!`);
         }
-        setAnimation(1);
         return res.json();
       })
       .then((data) => {
@@ -60,7 +59,7 @@ export default function Register({
         setRegSuccess(true);
       })
       .catch((err) => {
-        console.log(err);
+        setAnimation(0);
         return setRegError(err.message);
       });
   };

@@ -24,7 +24,6 @@ export default function HomePage() {
             setRegSuccess={setRegSuccess}
             setToken={setToken}
             setLoggedInUser={setLoggedInUser}
-            animation={animation}
             setAnimation={setAnimation}
           />
         )}
@@ -33,6 +32,7 @@ export default function HomePage() {
             setDisplayLogin={setDisplayLogin}
             setDisplayRegister={setDisplayRegister}
             setRegSuccess={setRegSuccess}
+            setAnimation={setAnimation}
           />
         )}
 

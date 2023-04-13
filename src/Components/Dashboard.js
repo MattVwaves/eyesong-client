@@ -5,12 +5,18 @@ import YourScores from './YourScores';
 
 export default function Dashboard() {
   const [displayScores, setDisplayScores] = useState(false);
+  const [loadingScores, setLoadingScores] = useState(false);
   const [displayLeaderboard, setDisplayLeaderboard] = useState(false);
+  const [animation, setAnimation] = useState(0);
 
   const Navi = useNavigate();
 
   const handleClick = async (e) => {
-    if (e.target.innerHTML === 'YOUR SCORES') setDisplayScores(true);
+    if (e.target.innerHTML === 'YOUR SCORES') {
+      setLoadingScores(true);
+      setAnimation(1);
+      setDisplayScores(true);
+    }
     if (e.target.innerHTML === 'LEADERBOARD') setDisplayLeaderboard(true);
     if (e.target.innerHTML === 'X') setDisplayLeaderboard(false);
     if (e.target.innerHTML === 'X') setDisplayScores(false);
@@ -25,7 +31,7 @@ export default function Dashboard() {
     <>
       <div className="App">
         <div className="circle-container">
-          <Eye />
+          <Eye animation={animation} />
         </div>
         <div id="dashboard-nav" className="login-container"></div>
         <div id="dashboard-nav" className="login-container-text">
@@ -50,8 +56,15 @@ export default function Dashboard() {
           <h2 id="login" onClick={handleClick}>
             Logout
           </h2>
+          {loadingScores && <p id="error">Loading scores...</p>}
 
-          {displayScores && <YourScores handleClick={handleClick} />}
+          {displayScores && (
+            <YourScores
+              handleClick={handleClick}
+              setAnimation={setAnimation}
+              setLoadingScores={setLoadingScores}
+            />
+          )}
         </div>
 
         <div className="title-container">

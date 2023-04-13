@@ -1,4 +1,4 @@
-export default function Eye({ animation, setAnimation }) {
+export default function Eye({ animation }) {
   return (
     <div className="circle-inner">
       <div id="circle-1" className="circle" animation={animation}></div>

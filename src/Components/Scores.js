@@ -12,14 +12,12 @@ const opts = {
   },
 };
 
-export default function Scores() {
+export default function Scores({ setAnimation, setLoadingScores }) {
   const [scoreSheets, setScoreSheets] = useState(null);
+  const [noScores, setNoScores] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [userId, setUserId] = useState(Number(localStorage.getItem('user-id')));
   const [scoresheetsDisplayed, setScoresheetsDisplayed] = useState([]);
-  const [viewScoreStyle, setViewScoreStyle] = useState({
-    backgroundColor: 'yellow',
-  });
 
   const handleScoreSheet = (score) => {
     if (!scoresheetsDisplayed.includes(score.id))
@@ -60,6 +58,12 @@ export default function Scores() {
       })
       .then((data) => {
         const scoreSheets = data.scoreSheets;
+        if (scoreSheets.length === 0) {
+          setLoadingScores(false);
+          setAnimation(0);
+          setNoScores(true);
+          return;
+        }
         const updatedScoresheets = scoreSheets
           .sort((a, b) => b.id - a.id)
           .map((sheet) => {
@@ -69,7 +73,12 @@ export default function Scores() {
             });
             return { ...sheet, totalScore: totalScore };
           });
+        setLoadingScores(false);
         setScoreSheets(updatedScoresheets);
+        setAnimation(0);
+      })
+      .catch((e) => {
+        console.log(e.message);
       });
   });
   return (
@@ -123,6 +132,15 @@ export default function Scores() {
             </>
           );
         })}
+      {noScores && (
+        <p id="error">
+          No scores yet hombre....
+          <br />
+          ....Hmmm............
+          <br />
+          what to do...
+        </p>
+      )}
     </>
   );
 }
