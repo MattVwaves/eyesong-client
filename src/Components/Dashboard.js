@@ -54,9 +54,9 @@ export default function Dashboard() {
           {displayScores && <YourScores handleClick={handleClick} />}
         </div>
 
-        {/* <div className="title-container">
+        <div className="title-container">
           <h1>EYESONG</h1>
-        </div> */}
+        </div>
       </div>
     </>
   );

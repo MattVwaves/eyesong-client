@@ -8,12 +8,16 @@ export default function Login({
   setRegSuccess,
   setToken,
   setLoggedInUser,
+  animation,
+  setAnimation,
 }) {
   const apiUrl = process.env.REACT_APP_SERVER_URL;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(null);
+  const [displayLogging, setDisplayLogging] = useState(false);
+
   const Navi = useNavigate();
 
   const handleDisplayRegister = () => {
@@ -41,9 +45,10 @@ export default function Login({
         password: password,
       }),
     };
+    setAnimation(1);
+    setDisplayLogging(true);
     await fetch(`${apiUrl}/user/login`, opts)
       .then((res) => {
-        console.log(res);
         if (res.ok !== true) {
           throw Error('username or password incorrect. Remember thyself.');
         }
@@ -60,6 +65,8 @@ export default function Login({
         Navi('/dashboard');
       })
       .catch((err) => {
+        setAnimation(0);
+        setDisplayLogging(false);
         setLoginError(err.message);
         return setLoginError(err.message);
       });
@@ -94,6 +101,7 @@ export default function Login({
           <div className="button-container">
             <button type="submit">
               <h2>Submit</h2>
+              {displayLogging && <p id="error">Logging in</p>}
             </button>
           </div>
         </form>

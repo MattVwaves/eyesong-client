@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import YouTube from 'react-youtube';
 
 import Hearts from './Hearts';
@@ -15,6 +16,7 @@ const opts = {
 };
 
 export default function QuizPage() {
+  const [displayLoading, setDisplayLoading] = useState(true);
   const [hearts, setHearts] = useState(3);
   const [round, setRound] = useState(0);
   const [roundDisplay, setRoundDisplay] = useState(1);
@@ -37,15 +39,19 @@ export default function QuizPage() {
 
   const youtubeBaseUrl = 'https://youtube.googleapis.com/youtube/v3/search?q=';
 
+  const Navi = useNavigate();
+
   const createRandomSong = () => {
     return Math.floor(Math.random() * 100);
   };
 
   useEffect(() => {
-    // setArtistName(localStorage.getItem('artist-name'));
-    // setSongTitle(localStorage.getItem('song-name'));
-    console.log(artistName);
-    console.log(songTitle);
+    setTimeout(() => {
+      setDisplayLoading(false);
+    }, 4000);
+  });
+
+  useEffect(() => {
     fetch(
       `${lastFmBaseUrl}${decadeTag}&limit=200&api_key=${lastFmApiKey}&format=json`
     )
@@ -76,14 +82,11 @@ export default function QuizPage() {
   }, []);
 
   const handleClick = (e) => {
-    <div className="nav-container">
-      <h3 className="decades-nav" onClick={handleClick}>
-        Dashboard
-      </h3>
-      <h3 className="decades-nav" onClick={handleClick}>
-        Logout
-      </h3>
-    </div>;
+    if (e.target.innerHTML === 'Dashboard') Navi('/dashboard');
+    if (e.target.innerHTML === 'Logout') {
+      localStorage.setItem('token', null);
+      Navi('/');
+    }
   };
 
   const handleReady = (e) => {
@@ -151,7 +154,15 @@ export default function QuizPage() {
             </h2>
           </div>
         </div>
+
         <div className="play-container">
+          {displayLoading && (
+            <p id="error">
+              Loading
+              <br />
+              song...
+            </p>
+          )}
           {round % 2 === 0 && (
             <img
               src={require('../play01.png')}
@@ -159,6 +170,13 @@ export default function QuizPage() {
               onClick={handlePlay}
               alt="play"
             />
+          )}
+          {round % 2 === 1 && (
+            <p id="error">
+              what/who
+              <br />
+              is it?
+            </p>
           )}
         </div>
 

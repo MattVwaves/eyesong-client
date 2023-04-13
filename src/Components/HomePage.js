@@ -9,11 +9,12 @@ export default function HomePage() {
   const [regSuccess, setRegSuccess] = useState(false);
   const [token, setToken] = useState('');
   const [loggedInUser, setLoggedInUser] = useState('');
+  const [animation, setAnimation] = useState(0);
   return (
     <>
       <div className="App">
         <div className="circle-container">
-          <Eye />
+          <Eye animation={animation} />
         </div>
         {displayLogin && (
           <Login
@@ -23,6 +24,8 @@ export default function HomePage() {
             setRegSuccess={setRegSuccess}
             setToken={setToken}
             setLoggedInUser={setLoggedInUser}
+            animation={animation}
+            setAnimation={setAnimation}
           />
         )}
         {displayRegister && (

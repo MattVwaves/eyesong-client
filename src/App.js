@@ -8,10 +8,6 @@ import Dashboard from './Components/Dashboard';
 function App() {
   return (
     <>
-      {/* <div className="App"> */}
-      {/* <QuizPage /> */}
-      {/* <HomePage /> */}
-      {/* </div> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/decades" element={<Decades />} />

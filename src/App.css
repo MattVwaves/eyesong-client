@@ -271,6 +271,26 @@ h1:hover {
   border-radius: 50%;
 }
 
+.play-container #error {
+  padding: 15px;
+  margin-right: 20px;
+  animation-name: loading;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loading {
+  from {
+    filter: invert(0%);
+    background-color: rgb(228, 126, 228);
+  }
+  to {
+    filter: invert(100%);
+    background-color: white;
+  }
+}
+
 .form-container {
   width: fit-content;
   margin: auto;
@@ -307,14 +327,6 @@ input {
   animation-direction: alternate;
   animation-iteration-count: infinite;
 }
-
-/* .labels,
-.inputs,
-.submit-buttons,
-form,
-.form-container {
-  background-color: transparent !important;
-} */
 
 .quiz-sheet {
   display: grid;
@@ -600,7 +612,7 @@ button,
 img:hover {
   cursor: pointer;
   animation-name: none;
-  mix-blend-mode: darken;
+  mix-blend-mode: none;
   margin: 5px;
 }
 
