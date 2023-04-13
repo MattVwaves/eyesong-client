@@ -34,6 +34,15 @@ export default function Scores() {
     }
   };
 
+  const formatDate = (date) => {
+    const formattedDate = new Date(date);
+    const year = formattedDate.getFullYear();
+    const month = formattedDate.getMonth() + 1;
+    const day = formattedDate.getDate();
+    const dateWithHyphens = [year, month, day].join('-');
+    return dateWithHyphens;
+  };
+
   useEffect(() => {
     const opts = {
       method: 'GET',
@@ -71,7 +80,7 @@ export default function Scores() {
             <>
               <div className="scores-container">
                 <p id="your-score">{score.totalScore}</p>
-                <p id="your-score">{score.createdAt}</p>
+                <p id="your-score">{formatDate(score.createdAt)}</p>
                 <p
                   id="your-score"
                   className="view-scoresheet"
