@@ -18,15 +18,32 @@ export default function Decades() {
     if (storedSongNumber) setSongNumber(storedSongNumber);
   });
 
+  const handleClick = (e) => {
+    if (e.target.innerHTML === 'Dashboard') Navi('/dashboard');
+    if (e.target.innerHTML === 'Logout') {
+      localStorage.setItem('token', null);
+      Navi('/');
+    }
+  };
+
   return (
     <>
       <div className="App">
+        <div className="nav-container">
+          <h3 className="decades-nav" onClick={handleClick}>
+            Dashboard
+          </h3>
+          <h3 className="decades-nav" onClick={handleClick}>
+            Logout
+          </h3>
+        </div>
         <Vinyl songNumber={songNumber} />
         <div className="circle-container">{/* <Eye /> */}</div>
         <div className="login-container" id="decades"></div>
 
         <div className="login-container-text" id="decades">
           <h2 id="decades-title">choose decade</h2>
+
           <div className="decades-container">
             <img
               className="decade-image"

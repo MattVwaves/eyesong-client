@@ -3,7 +3,7 @@ export default function Vinyl({ songNumber }) {
     <>
       {songNumber === 1 && (
         <div className="vinyl-container">
-          <h3>Songs remaining</h3>
+          <h3 id="songs-remaining">Songs remaining</h3>
           <img
             id="vinyl"
             src={require('../Assets/vinyl2.png')}
@@ -33,7 +33,7 @@ export default function Vinyl({ songNumber }) {
       )}
       {songNumber === 2 && (
         <div className="vinyl-container">
-          <h3>Songs remaining</h3>
+          <h3 id="songs-remaining">Songs remaining</h3>
           <img
             id="vinyl"
             src={require('../Assets/vinyl2.png')}
@@ -58,7 +58,7 @@ export default function Vinyl({ songNumber }) {
       )}
       {songNumber === 3 && (
         <div className="vinyl-container">
-          <h3>Songs remaining</h3>
+          <h3 id="songs-remaining">Songs remaining</h3>
           <img
             id="vinyl"
             src={require('../Assets/vinyl2.png')}
@@ -78,7 +78,7 @@ export default function Vinyl({ songNumber }) {
       )}
       {songNumber === 4 && (
         <div className="vinyl-container">
-          <h3>Songs remaining</h3>
+          <h3 id="songs-remaining">Songs remaining</h3>
           <img
             id="vinyl"
             src={require('../Assets/vinyl2.png')}
@@ -93,7 +93,7 @@ export default function Vinyl({ songNumber }) {
       )}
       {songNumber === 5 && (
         <div className="vinyl-container">
-          <h3>Songs remaining</h3>
+          <h3 id="songs-remaining">Songs remaining</h3>
           <img
             id="vinyl"
             src={require('../Assets/vinyl2.png')}

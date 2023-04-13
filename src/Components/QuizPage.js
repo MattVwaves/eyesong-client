@@ -75,6 +75,17 @@ export default function QuizPage() {
       });
   }, []);
 
+  const handleClick = (e) => {
+    <div className="nav-container">
+      <h3 className="decades-nav" onClick={handleClick}>
+        Dashboard
+      </h3>
+      <h3 className="decades-nav" onClick={handleClick}>
+        Logout
+      </h3>
+    </div>;
+  };
+
   const handleReady = (e) => {
     const playVideo = e.target;
     setPlayVideo(playVideo.clearVideo());
@@ -110,6 +121,14 @@ export default function QuizPage() {
 
   return (
     <>
+      <div className="nav-container">
+        <h3 className="decades-nav" onClick={handleClick}>
+          Dashboard
+        </h3>
+        <h3 className="decades-nav" onClick={handleClick}>
+          Logout
+        </h3>
+      </div>
       <div className="App">
         <div className="main-container">
           <div className="title-container-l">

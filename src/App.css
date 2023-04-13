@@ -478,11 +478,29 @@ button,
   background-color: transparent !important;
 }
 
-h3 {
+#songs-remaining {
   display: inline;
   background-color: transparent !important;
   padding: 5px;
   border-style: none none solid solid;
+}
+
+.nav-container {
+  position: absolute;
+  background-color: transparent !important;
+  z-index: 1;
+}
+.decades-nav {
+  background-color: aquamarine;
+  width: fit-content;
+  border: 3px solid black;
+  margin: 5px;
+  padding: 5px;
+}
+
+.decades-nav:hover {
+  background-color: yellow;
+  cursor: pointer;
 }
 
 #vinyl {
@@ -502,7 +520,8 @@ h3 {
 }
 
 #decades-title {
-  margin-top: 20px;
+  margin-top: 30px;
+  border: none;
 }
 
 .decades-container {
