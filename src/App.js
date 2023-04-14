@@ -8,13 +8,22 @@ import Dashboard from './Components/Dashboard';
 
 function App() {
   const [correct, setCorrect] = useState(false);
+  const [incorrect, setIncorrect] = useState(false);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/decades" element={<Decades correct={correct} />} />
-        <Route path="/quiz" element={<QuizPage setCorrect={setCorrect} />} />
+        <Route
+          path="/decades"
+          element={<Decades correct={correct} incorrect={incorrect} />}
+        />
+        <Route
+          path="/quiz"
+          element={
+            <QuizPage setCorrect={setCorrect} setIncorrect={setIncorrect} />
+          }
+        />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>

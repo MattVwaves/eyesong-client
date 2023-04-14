@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Vinyl from './Vinyl';
 
-export default function Decades({ correct }) {
+export default function Decades({ correct, incorrect }) {
   const [songNumber, setSongNumber] = useState(1);
   const [finalScore, setFinalScore] = useState(null);
 
@@ -102,7 +102,8 @@ export default function Decades({ correct }) {
                 {correct && (
                   <p id="points-scored">{`YOU SCORED ${finalScore} points!!`}</p>
                 )}
-                {!correct && (
+                {incorrect && <p id="points-scored">You got nothing kid</p>}
+                {!correct && !incorrect && (
                   <img
                     className="decade-image"
                     onClick={handleDecadeSelection}

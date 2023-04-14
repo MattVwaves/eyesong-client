@@ -15,7 +15,7 @@ const opts = {
   },
 };
 
-export default function QuizPage({ setCorrect }) {
+export default function QuizPage({ setCorrect, setIncorrect }) {
   const [displayLoading, setDisplayLoading] = useState(true);
   const [hearts, setHearts] = useState(3);
   const [round, setRound] = useState(0);
@@ -197,6 +197,7 @@ export default function QuizPage({ setCorrect }) {
             playSongFirst={playSongFirst}
             setPlaySongFirst={setPlaySongFirst}
             setCorrect={setCorrect}
+            setIncorrect={setIncorrect}
           />
         </div>
       </div>
