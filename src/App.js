@@ -16,7 +16,14 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/decades"
-          element={<Decades correct={correct} incorrect={incorrect} />}
+          element={
+            <Decades
+              correct={correct}
+              incorrect={incorrect}
+              setCorrect={setCorrect}
+              setIncorrect={setIncorrect}
+            />
+          }
         />
         <Route
           path="/quiz"

@@ -3,7 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import Vinyl from './Vinyl';
 
-export default function Decades({ correct, incorrect }) {
+export default function Decades({
+  correct,
+  incorrect,
+  setCorrect,
+  setIncorrect,
+}) {
   const [songNumber, setSongNumber] = useState(1);
   const [finalScore, setFinalScore] = useState(null);
 
@@ -11,6 +16,8 @@ export default function Decades({ correct, incorrect }) {
   const handleDecadeSelection = (e) => {
     const decade = e.target.name;
     localStorage.setItem('decade', decade);
+    setCorrect(false);
+    setIncorrect(false);
     Navi('/quiz');
   };
 
@@ -19,6 +26,14 @@ export default function Decades({ correct, incorrect }) {
     if (storedSongNumber) setSongNumber(storedSongNumber);
     const finalScore = Number(localStorage.getItem('final-score'));
     if (finalScore) setFinalScore(finalScore);
+  });
+
+  useEffect(() => {
+    const resetDecades = () => {
+      setCorrect(false);
+      setIncorrect(false);
+    };
+    setTimeout(resetDecades, 5000);
   });
 
   const handleClick = (e) => {

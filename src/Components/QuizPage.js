@@ -48,7 +48,7 @@ export default function QuizPage({ setCorrect, setIncorrect }) {
   useEffect(() => {
     setTimeout(() => {
       setDisplayLoading(false);
-    }, 4000);
+    }, 6000);
   });
 
   useEffect(() => {
