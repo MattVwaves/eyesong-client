@@ -627,15 +627,15 @@ img:hover {
 }
 
 .your-scores {
-  /* background-color: white; */
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%);
-  margin: auto;
-  width: 100%;
+  width: 42vw;
   height: 60vh;
   overflow: scroll;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .scores-container {
@@ -686,17 +686,25 @@ img:hover {
   cursor: pointer;
 }
 
-#scoresheet-container {
+/* #scoresheet-container {
   width: 50vw;
   grid-template-columns: 10% 30% 15% 15% 15% 15%;
   margin: 0;
   z-index: 1;
+} */
+
+#scoresheet-container {
+  width: 50vw;
+  grid-template-columns: 30% 15% 10% 10% 15%;
+  z-index: 1;
+  margin: auto;
+  margin-left: 0.5vw;
 }
 
 #scoresheet-container p {
   background-color: rgb(230, 158, 230);
   color: white;
-  font-size: 30px;
+  font-size: 1.5vw;
 }
 
 #your-score {
