@@ -85,7 +85,7 @@ iframe {
   text-align: right;
 }
 
-h1:hover {
+h1 {
   animation-name: title;
   animation-duration: 1s;
   animation-direction: alternate;
