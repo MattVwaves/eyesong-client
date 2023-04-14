@@ -733,3 +733,12 @@ img:hover {
   background-color: transparent !important;
   color: yellow;
 }
+
+#final-score {
+  position: absolute;
+}
+
+#final-score p {
+  font-size: 20px;
+  padding: 2vw;
+}

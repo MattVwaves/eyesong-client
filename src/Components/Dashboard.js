@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import Eye from './Eye';
 import YourScores from './YourScores';
 
-export default function Dashboard() {
+export default function Dashboard({ finishedPlay, setFinishedPlay }) {
   const [displayScores, setDisplayScores] = useState(false);
   const [loadingScores, setLoadingScores] = useState(false);
   const [displayLeaderboard, setDisplayLeaderboard] = useState(false);
   const [animation, setAnimation] = useState(0);
+  const [totalScore, setTotalScore] = useState(null);
 
   const Navi = useNavigate();
+
+  useEffect(() => {
+    const totalScore = Number(localStorage.getItem('total-score'));
+    if (totalScore) setTotalScore(totalScore);
+  });
 
   const handleClick = async (e) => {
     if (e.target.innerHTML === 'YOUR SCORES') {
@@ -20,11 +26,18 @@ export default function Dashboard() {
     if (e.target.innerHTML === 'LEADERBOARD') setDisplayLeaderboard(true);
     if (e.target.innerHTML === 'X') setDisplayLeaderboard(false);
     if (e.target.innerHTML === 'X') setDisplayScores(false);
-    if (e.target.innerHTML === 'PLAY') Navi('/decades');
+    if (e.target.innerHTML === 'PLAY') {
+      localStorage.setItem('total-score', null);
+      Navi('/decades');
+    }
     if (e.target.innerHTML === 'Logout') {
       localStorage.setItem('token', null);
       Navi('/');
     }
+  };
+
+  const handleCloseTotal = () => {
+    setFinishedPlay(false);
   };
 
   return (
@@ -35,6 +48,20 @@ export default function Dashboard() {
         </div>
         <div id="dashboard-nav" className="login-container"></div>
         <div id="dashboard-nav" className="login-container-text">
+          {finishedPlay && (
+            <>
+              <div id="final-score">
+                <p id="your-score">
+                  Well done for completing 5 songs! ----That's it!!--- You got{' '}
+                  {totalScore}
+                  points!!! --- That could be a lot, it could be a little...
+                </p>
+                <span id="close-window" onClick={handleCloseTotal}>
+                  X
+                </span>
+              </div>
+            </>
+          )}
           <h2 id="login" className="dash-play" onClick={handleClick}>
             PLAY
           </h2>

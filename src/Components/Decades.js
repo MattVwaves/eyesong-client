@@ -16,6 +16,7 @@ export default function Decades({
   const handleDecadeSelection = (e) => {
     const decade = e.target.name;
     localStorage.setItem('decade', decade);
+    localStorage.setItem('final-score', null);
     setCorrect(false);
     setIncorrect(false);
     Navi('/quiz');

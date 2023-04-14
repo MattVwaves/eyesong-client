@@ -15,7 +15,11 @@ const opts = {
   },
 };
 
-export default function QuizPage({ setCorrect, setIncorrect }) {
+export default function QuizPage({
+  setCorrect,
+  setIncorrect,
+  setFinishedPlay,
+}) {
   const [displayLoading, setDisplayLoading] = useState(true);
   const [hearts, setHearts] = useState(3);
   const [round, setRound] = useState(0);
@@ -72,7 +76,7 @@ export default function QuizPage({ setCorrect, setIncorrect }) {
         artistArr.forEach((word) => (artistQuery += `${word}%20`));
         songArr.forEach((word) => (songQuery += `${word}%20`));
         const youtubeQuery = artistQuery + songQuery;
-        fetch(`${youtubeBaseUrl}${youtubeQuery})single&key=${youtubeApiKey3}`)
+        fetch(`${youtubeBaseUrl}${youtubeQuery})single&key=${youtubeApiKey}`)
           .then((res) => res.json())
           .then((data) => {
             const videoId = data.items[0].id.videoId;
@@ -198,6 +202,7 @@ export default function QuizPage({ setCorrect, setIncorrect }) {
             setPlaySongFirst={setPlaySongFirst}
             setCorrect={setCorrect}
             setIncorrect={setIncorrect}
+            setFinishedPlay={setFinishedPlay}
           />
         </div>
       </div>

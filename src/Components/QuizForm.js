@@ -20,6 +20,7 @@ export default function QuizForm({
   setPlaySongFirst,
   setCorrect,
   setIncorrect,
+  setFinishedPlay,
 }) {
   const [guessItemInput, setGuessItemInput] = useState('');
   const [guessItem, setGuessItem] = useState('song');
@@ -31,6 +32,7 @@ export default function QuizForm({
   const [score, setScore] = useState(0);
   const [scoresheetId, setScoresheetId] = useState(null);
   const [videoId, setVideoId] = useState(null);
+  const [totalScore, setTotalScore] = useState(null);
 
   const Navi = useNavigate();
 
@@ -54,6 +56,8 @@ export default function QuizForm({
     setDecade(decade);
     const videoId = localStorage.getItem('video-id');
     setVideoId(videoId);
+    const totalScore = Number(localStorage.getItem('total-score'));
+    setTotalScore(totalScore);
   });
 
   const handleChange = (e) => {
@@ -72,20 +76,26 @@ export default function QuizForm({
     e.preventDefault();
     if (songOrArtist === 'song') {
       if (songTitle.toLowerCase().includes(guessItemInput.toLowerCase())) {
+        let updatedScore = 0;
         if (roundDisplay === 1) {
-          const updatedScore = score + 40;
+          updatedScore = score + 40;
           setScore(updatedScore);
           localStorage.setItem('score', updatedScore);
         }
         if (roundDisplay === 2) {
-          const updatedScore = score + 20;
+          updatedScore = score + 20;
           setScore(updatedScore);
           localStorage.setItem('score', updatedScore);
         }
         if (roundDisplay === 3) {
-          const updatedScore = score + 10;
+          updatedScore = score + 10;
           setScore(updatedScore);
           localStorage.setItem('score', updatedScore);
+        }
+        if (totalScore) {
+          localStorage.setItem('total-score', totalScore + updatedScore);
+        } else {
+          localStorage.setItem('total-score', updatedScore);
         }
         setGuessItemInput('');
         setGuessItem('artist');
@@ -97,6 +107,7 @@ export default function QuizForm({
     if (songOrArtist === 'artist') {
       if (artistName.toLowerCase().includes(guessItemInput.toLowerCase())) {
         const updatedScore = score + 15;
+        localStorage.setItem('total-score', totalScore + 15);
         setScore(updatedScore);
         localStorage.setItem('final-score', updatedScore);
         localStorage.setItem('score', updatedScore);
@@ -139,6 +150,8 @@ export default function QuizForm({
                 localStorage.setItem('song-number', null);
                 localStorage.setItem('scoresheet-id', null);
                 localStorage.setItem('score', null);
+                localStorage.setItem('finished-play', 'true');
+                setFinishedPlay(true);
                 Navi('/dashboard');
               }
             })
@@ -177,12 +190,15 @@ export default function QuizForm({
               localStorage.setItem('song-number', songNumber + 1);
               if (songNumber < 5) {
                 localStorage.setItem('score', null);
+                setCorrect(true);
                 Navi('/decades');
               }
               if (songNumber === 5) {
                 localStorage.setItem('song-number', null);
                 localStorage.setItem('scoresheet-id', null);
                 localStorage.setItem('score', null);
+                localStorage.setItem('finished-play', 'true');
+                setFinishedPlay(true);
                 Navi('/dashboard');
               }
             })
@@ -242,6 +258,8 @@ export default function QuizForm({
             localStorage.setItem('song-number', null);
             localStorage.setItem('scoresheet-id', null);
             localStorage.setItem('score', null);
+            localStorage.setItem('finished-play', 'true');
+            setFinishedPlay(true);
             Navi('/dashboard');
           }
         })
@@ -287,6 +305,8 @@ export default function QuizForm({
             localStorage.setItem('song-number', null);
             localStorage.setItem('scoresheet-id', null);
             localStorage.setItem('score', null);
+            localStorage.setItem('finished-play', 'true');
+            setFinishedPlay(true);
             Navi('/dashboard');
           }
         })

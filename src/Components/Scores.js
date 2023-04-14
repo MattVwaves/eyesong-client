@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Youtube from 'react-youtube';
+import Score from './Score';
 
 const apiUrl = process.env.REACT_APP_SERVER_URL;
 
@@ -109,22 +110,7 @@ export default function Scores({ setAnimation, setLoadingScores }) {
               {scoresheetsDisplayed.includes(score.id) && (
                 <>
                   {score.songs.map((song) => {
-                    return (
-                      <div
-                        className="scores-container"
-                        id="scoresheet-container"
-                      >
-                        <div>
-                          <p id="your-score">
-                            <Youtube videoId={song.videoId} />
-                          </p>
-                        </div>
-                        <p id="your-score">{song.artistName}</p>
-                        <p id="your-score">{song.songTitle}</p>
-                        <p id="your-score">{song.decade}</p>
-                        <p id="your-score">SCORE: {song.score}</p>
-                      </div>
-                    );
+                    return <Score song={song} />;
                   })}
                 </>
               )}

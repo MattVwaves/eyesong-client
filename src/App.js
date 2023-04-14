@@ -9,6 +9,7 @@ import Dashboard from './Components/Dashboard';
 function App() {
   const [correct, setCorrect] = useState(false);
   const [incorrect, setIncorrect] = useState(false);
+  const [finishedPlay, setFinishedPlay] = useState(false);
 
   return (
     <>
@@ -28,10 +29,22 @@ function App() {
         <Route
           path="/quiz"
           element={
-            <QuizPage setCorrect={setCorrect} setIncorrect={setIncorrect} />
+            <QuizPage
+              setCorrect={setCorrect}
+              setIncorrect={setIncorrect}
+              setFinishedPlay={setFinishedPlay}
+            />
           }
         />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <Dashboard
+              finishedPlay={finishedPlay}
+              setFinishedPlay={setFinishedPlay}
+            />
+          }
+        />
       </Routes>
     </>
   );
