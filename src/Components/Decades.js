@@ -45,78 +45,110 @@ export default function Decades() {
           <h2 id="decades-title">choose decade</h2>
 
           <div className="decades-container">
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              name="1940s"
-              id="billie"
-              src={require('../Assets/billie-h.webp')}
-              alt="billie "
-            />
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              id="elvis"
-              name="1950s"
-              src={require('../Assets/elvis.jpeg')}
-              alt="elvis presley"
-            />
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              id="jimi"
-              name="1960s"
-              src={require('../Assets/hendrix.jpeg')}
-              alt="jimi hendrix"
-            />
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              id="pink"
-              name="1970s"
-              src={require('../Assets/thewall.jpeg')}
-              alt="the wall"
-            />
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              id="prince"
-              name="1980s"
-              src={require('../Assets/prince.webp')}
-              alt="prince"
-            />
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              id="kurt"
-              name="1990s"
-              src={require('../Assets/kurt2.webp')}
-              alt="kurt"
-            />
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              id="amy"
-              name="2000s"
-              src={require('../Assets/amy.jpeg')}
-              alt="amy"
-            />
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              id="lana"
-              name="2010s"
-              src={require('../Assets/lana.jpeg')}
-              alt="lana"
-            />
-            <img
-              className="decade-image"
-              onClick={handleDecadeSelection}
-              id="abel"
-              name="2020s"
-              src={require('../Assets/abel.jpeg')}
-              alt="abel"
-            />
+            <div id="correct-score-container">
+              <div id="correct-score-inner-container"></div>
+            </div>
+            <div>
+              <p id="error">CORRECT</p>
+              <img
+                className="decade-image"
+                onClick={handleDecadeSelection}
+                name="1940s"
+                id="billie"
+                src={require('../Assets/billie-h.webp')}
+                alt="billie "
+              />
+            </div>
+            <div>
+              <p id="error">CORRECT</p>
+              <img
+                className="decade-image"
+                onClick={handleDecadeSelection}
+                id="elvis"
+                name="1950s"
+                src={require('../Assets/elvis.jpeg')}
+                alt="elvis presley"
+              />
+            </div>
+            <div>
+              <p id="error">CORRECT</p>
+              <img
+                className="decade-image"
+                onClick={handleDecadeSelection}
+                id="jimi"
+                name="1960s"
+                src={require('../Assets/hendrix.jpeg')}
+                alt="jimi hendrix"
+              />
+            </div>
+            <div>
+              <p id="error">CORRECT</p>
+              <img
+                className="decade-image"
+                onClick={handleDecadeSelection}
+                id="pink"
+                name="1970s"
+                src={require('../Assets/thewall.jpeg')}
+                alt="the wall"
+              />
+            </div>
+            <div>
+              <div>
+                <p id="points-scored">YOU SCORED 20 points!!</p>
+                {/* <img
+                  className="decade-image"
+                  onClick={handleDecadeSelection}
+                  id="prince"
+                  name="1980s"
+                  src={require('../Assets/prince.webp')}
+                  alt="prince"
+                /> */}
+              </div>
+            </div>
+            <div>
+              <p id="error">CORRECT</p>
+              <img
+                className="decade-image"
+                onClick={handleDecadeSelection}
+                id="kurt"
+                name="1990s"
+                src={require('../Assets/kurt2.webp')}
+                alt="kurt"
+              />
+            </div>
+            <div>
+              <p id="error">CORRECT</p>
+              <img
+                className="decade-image"
+                onClick={handleDecadeSelection}
+                id="amy"
+                name="2000s"
+                src={require('../Assets/amy.jpeg')}
+                alt="amy"
+              />
+            </div>
+            <div>
+              <p id="error">CORRECT</p>
+              <img
+                className="decade-image"
+                onClick={handleDecadeSelection}
+                id="lana"
+                name="2010s"
+                src={require('../Assets/lana.jpeg')}
+                alt="lana"
+              />
+            </div>
+            <div>
+              <p id="error">CORRECT</p>
+              <img
+                className="decade-image"
+                onClick={handleDecadeSelection}
+                id="abel"
+                name="2020s"
+                src={require('../Assets/abel.jpeg')}
+                alt="abel"
+              />
+            </div>
           </div>
         </div>
         <div className="title-container">
