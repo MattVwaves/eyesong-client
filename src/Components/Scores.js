@@ -114,7 +114,9 @@ export default function Scores({ setAnimation, setLoadingScores }) {
                         className="scores-container"
                         id="scoresheet-container"
                       >
-                        <p id="your-score">{song.songNumber}</p>
+                        <div id="your-score">
+                          <p id="score-txt">{song.songNumber}</p>
+                        </div>
                         <div>
                           <p id="your-score">
                             <Youtube videoId={song.videoId} />
@@ -123,7 +125,7 @@ export default function Scores({ setAnimation, setLoadingScores }) {
                         <p id="your-score">{song.artistName}</p>
                         <p id="your-score">{song.songTitle}</p>
                         <p id="your-score">{song.decade}</p>
-                        <p id="your-score">{song.score}</p>
+                        <p id="your-score">SCORE: {song.score}</p>
                       </div>
                     );
                   })}

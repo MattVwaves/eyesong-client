@@ -27,6 +27,7 @@ h2 {
   width: 97.7vw;
   border: 10px solid black;
   margin: 10px;
+  overflow: hidden;
   /* position: relative; */
 }
 
@@ -395,7 +396,7 @@ h2 {
   position: absolute;
   height: 310px;
   min-width: 300px;
-  width: 30vw;
+  width: 35vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -633,7 +634,8 @@ img:hover {
   transform: translate(-50%);
   margin: auto;
   width: 100%;
-  height: fit-content;
+  height: 60vh;
+  overflow: scroll;
 }
 
 .scores-container {
@@ -648,7 +650,16 @@ img:hover {
   text-align: center;
   background-color: white;
   padding: 10px;
+  border: 1px solid rgba(219, 219, 219);
   /* font-size: 20px; */
+}
+
+#score-txt {
+  position: absolute;
+  padding: 1vw;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #close-window {
