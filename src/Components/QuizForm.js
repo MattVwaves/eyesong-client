@@ -69,7 +69,7 @@ export default function QuizForm({
     }
     e.preventDefault();
     if (songOrArtist === 'song') {
-      if (guessItemInput.toLowerCase() === songTitle.toLowerCase()) {
+      if (songTitle.toLowerCase().includes(guessItemInput.toLowerCase())) {
         if (roundDisplay === 1) {
           const updatedScore = score + 40;
           setScore(updatedScore);
@@ -93,7 +93,7 @@ export default function QuizForm({
     }
 
     if (songOrArtist === 'artist') {
-      if (guessItemInput.toLowerCase() === artistName.toLowerCase()) {
+      if (artistName.toLowerCase().includes(guessItemInput.toLowerCase())) {
         const updatedScore = score + 15;
         setScore(updatedScore);
         localStorage.setItem('score', updatedScore);
