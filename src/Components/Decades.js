@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import Vinyl from './Vinyl';
 
-export default function Decades() {
+export default function Decades({ correct }) {
   const [songNumber, setSongNumber] = useState(1);
-  const [correct, setCorrect] = useState(false);
+  const [finalScore, setFinalScore] = useState(null);
 
   const Navi = useNavigate();
   const handleDecadeSelection = (e) => {
@@ -17,6 +17,8 @@ export default function Decades() {
   useEffect(() => {
     const storedSongNumber = Number(localStorage.getItem('song-number'));
     if (storedSongNumber) setSongNumber(storedSongNumber);
+    const finalScore = Number(localStorage.getItem('final-score'));
+    if (finalScore) setFinalScore(finalScore);
   });
 
   const handleClick = (e) => {
@@ -97,7 +99,9 @@ export default function Decades() {
             </div>
             <div>
               <div>
-                {correct && <p id="points-scored">YOU SCORED 20 points!!</p>}
+                {correct && (
+                  <p id="points-scored">{`YOU SCORED ${finalScore} points!!`}</p>
+                )}
                 {!correct && (
                   <img
                     className="decade-image"

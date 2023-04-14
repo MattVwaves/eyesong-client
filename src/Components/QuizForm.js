@@ -18,6 +18,7 @@ export default function QuizForm({
   setSongPlaying,
   playSongFirst,
   setPlaySongFirst,
+  setCorrect,
 }) {
   const [guessItemInput, setGuessItemInput] = useState('');
   const [guessItem, setGuessItem] = useState('song');
@@ -96,6 +97,7 @@ export default function QuizForm({
       if (artistName.toLowerCase().includes(guessItemInput.toLowerCase())) {
         const updatedScore = score + 15;
         setScore(updatedScore);
+        localStorage.setItem('final-score', updatedScore);
         localStorage.setItem('score', updatedScore);
         setGuessItemInput('');
 
@@ -129,6 +131,7 @@ export default function QuizForm({
               localStorage.setItem('song-number', songNumber + 1);
               if (songNumber < 5) {
                 localStorage.setItem('score', null);
+                setCorrect(true);
                 Navi('/decades');
               }
               if (songNumber === 5) {
