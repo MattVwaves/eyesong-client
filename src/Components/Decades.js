@@ -5,6 +5,7 @@ import Vinyl from './Vinyl';
 
 export default function Decades() {
   const [songNumber, setSongNumber] = useState(1);
+  const [correct, setCorrect] = useState(false);
 
   const Navi = useNavigate();
   const handleDecadeSelection = (e) => {
@@ -45,11 +46,13 @@ export default function Decades() {
           <h2 id="decades-title">choose decade</h2>
 
           <div className="decades-container">
-            <div id="correct-score-container">
-              <div id="correct-score-inner-container"></div>
-            </div>
+            {correct && (
+              <div id="correct-score-container">
+                <div id="correct-score-inner-container"></div>
+              </div>
+            )}
             <div>
-              <p id="error">CORRECT</p>
+              {correct && <p id="error">CORRECT</p>}
               <img
                 className="decade-image"
                 onClick={handleDecadeSelection}
@@ -60,7 +63,7 @@ export default function Decades() {
               />
             </div>
             <div>
-              <p id="error">CORRECT</p>
+              {correct && <p id="error">CORRECT</p>}
               <img
                 className="decade-image"
                 onClick={handleDecadeSelection}
@@ -71,7 +74,7 @@ export default function Decades() {
               />
             </div>
             <div>
-              <p id="error">CORRECT</p>
+              {correct && <p id="error">CORRECT</p>}
               <img
                 className="decade-image"
                 onClick={handleDecadeSelection}
@@ -82,7 +85,7 @@ export default function Decades() {
               />
             </div>
             <div>
-              <p id="error">CORRECT</p>
+              {correct && <p id="error">CORRECT</p>}
               <img
                 className="decade-image"
                 onClick={handleDecadeSelection}
@@ -94,19 +97,21 @@ export default function Decades() {
             </div>
             <div>
               <div>
-                <p id="points-scored">YOU SCORED 20 points!!</p>
-                {/* <img
-                  className="decade-image"
-                  onClick={handleDecadeSelection}
-                  id="prince"
-                  name="1980s"
-                  src={require('../Assets/prince.webp')}
-                  alt="prince"
-                /> */}
+                {correct && <p id="points-scored">YOU SCORED 20 points!!</p>}
+                {!correct && (
+                  <img
+                    className="decade-image"
+                    onClick={handleDecadeSelection}
+                    id="prince"
+                    name="1980s"
+                    src={require('../Assets/prince.webp')}
+                    alt="prince"
+                  />
+                )}
               </div>
             </div>
             <div>
-              <p id="error">CORRECT</p>
+              {correct && <p id="error">CORRECT</p>}
               <img
                 className="decade-image"
                 onClick={handleDecadeSelection}
@@ -117,7 +122,7 @@ export default function Decades() {
               />
             </div>
             <div>
-              <p id="error">CORRECT</p>
+              {correct && <p id="error">CORRECT</p>}
               <img
                 className="decade-image"
                 onClick={handleDecadeSelection}
@@ -128,7 +133,7 @@ export default function Decades() {
               />
             </div>
             <div>
-              <p id="error">CORRECT</p>
+              {correct && <p id="error">CORRECT</p>}
               <img
                 className="decade-image"
                 onClick={handleDecadeSelection}
@@ -139,7 +144,7 @@ export default function Decades() {
               />
             </div>
             <div>
-              <p id="error">CORRECT</p>
+              {correct && <p id="error">CORRECT</p>}
               <img
                 className="decade-image"
                 onClick={handleDecadeSelection}
