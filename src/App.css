@@ -9,7 +9,8 @@ body,
 button,
 input {
   font-family: 'Barlow Condensed', sans-serif;
-  /* color: violet */
+  font-weight: 400;
+  font-style: italic;
 }
 
 img {
